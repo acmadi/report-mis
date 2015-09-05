@@ -1,355 +1,888 @@
-<?php 
-$user_level = $this->session->userdata('user_level');
-?>
-										
+<?php $user_level = $this->session->userdata('user_level'); ?>
 <!DOCTYPE html>
-<html lang="en" class="app">
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="keywords" content="bootstrap, admin, dashboard, flat admin template, responsive," />
+  <title><?php echo $menu_title; ?> | Amartha Investor MIS</title>
 
-<head>
-	<meta charset="utf-8" />
-	<title><?php echo $menu_title; ?> | Amartha MIS</title>
-	<meta name="description" content="" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<meta name="robots" content="noindex, nofollow" />
-	<link rel="stylesheet" href="<?php echo $this->template->get_theme_path(); ?>/css/app.v2.css" type="text/css" />
-	<link rel="stylesheet" href="<?php echo $this->template->get_theme_path(); ?>/css/font.css" type="text/css" cache="false" />
-	<link rel="stylesheet" href="<?php echo $this->template->get_theme_path(); ?>/js/calendar/bootstrap_calendar.css" type="text/css" cache="false" />	
-	<link rel="stylesheet" href="<?php echo $this->template->get_theme_path(); ?>/js/datepicker/datepicker.css" type="text/css" cache="false" />
-	<link rel="stylesheet" href="<?php echo $this->template->get_theme_path(); ?>/css/custom.css" type="text/css" />
-	<script src="<?php echo $this->template->get_theme_path(); ?>/js/jquery-1.10.2.min.js" cache="false"></script>
-	<!--[if lt IE 9]> <script src="js/ie/html5shiv.js" cache="false"></script> <script src="js/ie/respond.min.js" cache="false"></script> <script src="js/ie/excanvas.js" cache="false"></script> <![endif]-->
-</head>
+  <!-- ========== Css Files ========== -->
+  <link href="<?php echo $this->template->get_theme_path(); ?>css/root.css" rel="stylesheet">
 
-<body>
-	<section class="vbox">
-		<!-- TOP MENU -->
-		<header class="bg-dark dk header navbar navbar-fixed-top-xs">
-			<div class="navbar-header aside-md">
-				<a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen" data-target="#nav"> <i class="fa fa-bars"></i> 
-				</a>
-				<a href="#" class="navbar-brand" data-toggle="fullscreen">
-					<img src="<?php echo $this->template->get_theme_path(); ?>/images/logo_amartha.png" class="m-r-sm" alt="Amartha"> </a>
-				<a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".nav-user"> <i class="fa fa-cog"></i> 
-				</a>
-			</div>
-			<!--
-			<ul class="nav navbar-nav hidden-xs">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle dker" data-toggle="dropdown"> <i class="fa fa-building-o"></i>  <span class="font-bold"> Cabang Ciseeng</span></a>
-				</li>
-				<li>
-					<div class="m-t m-l"> <a href="#" class="dropdown-toggle btn btn-xs btn-primary" title="Upgrade"><i class="fa fa-building-o icon"></i>&nbsp;&nbsp;Kantor Pusat</a> 
-					</div>
-				</li>				
-			</ul>-->
-			
-			<ul class="nav navbar-nav navbar-right hidden-xs nav-user">
-				
-				<li class="dropdown hidden-xs"> <a href="#" class="dker"><?php echo date("D, d M Y");?></a></li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-						<!--<span class="thumb-sm avatar pull-left"> 
-						<img src="<?php echo $this->template->get_theme_path(); ?>/images/avatar.jpg"> 
-						</span>-->
-						<?php echo $this->session->userdata('user_fullname');?> <b class="caret"></b> 
-					</a>
-					<ul class="dropdown-menu animated fadeInRight"> <span class="arrow top"></span> 
-						<li><a href="<?php echo site_url(); ?>/users/setting_user/<?php echo $this->session->userdata('user_id') ?>">Settings</a></li>
-						<li class="divider"></li>
-						<li> <a href="<?php echo site_url(); ?>/login/logout" >Logout</a> 
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</header>
-		<!-- END TOP MENU -->
-		
-		<section>
-			<section class="hbox stretch">
-				<!-- .aside -->
-				<aside class="bg-dark lter aside-md hidden-print" id="nav">
-					<section class="vbox">
-						<header class="header bg-primary lter text-center clearfix">
-							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-dark btn-icon" title="Cabang"><i class="fa fa-building-o"></i></button>
-								
-								<div class="btn-group hidden-nav-xs">
-									<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
-										<?php 
-											if($this->session->userdata('user_branch')==0){ echo "Kantor Pusat"; }
-											else{ echo "Cabang ".$this->session->userdata('user_branch_name'); }
-										?> 
-										<!--&nbsp;&nbsp;<span class="caret"></span>-->
-									</button>
-									<?php if($user_level==1){ ?>
-									<!---->
-									<ul class="dropdown-menu text-left">
-										<li><a href="<?php echo site_url();?>/switchbranch/cabang/0">Kantor Pusat</a></li>
-										<li><a href="<?php echo site_url();?>/switchbranch/cabang/1">Cabang Ciseeng</a></li>
-										<li><a href="<?php echo site_url();?>/switchbranch/cabang/2">Cabang Kemang</a></li>
-										<li><a href="<?php echo site_url();?>/switchbranch/cabang/4">Cabang Jasinga</a></li>
-										<li><a href="<?php echo site_url();?>/switchbranch/cabang/3">Cabang Bojong</a></li>
-										<li><a href="<?php echo site_url();?>/switchbranch/cabang/5">Cabang Tenjo</a></li>
-										<li><a href="<?php echo site_url();?>/switchbranch/cabang/6">Cabang Cangkuang</a></li> 
-									</ul>
-									
-									<?php } ?>
-								</div>
-								
-							</div>
-						</header>
-						<section class="w-f scrollable">
-							<div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="5px" data-color="#333333">
-								<!-- nav -->
-								<nav class="nav-primary hidden-xs">
-									<ul class="nav">
-										<li class="<?php echo $menu_dashboard; ?>">
-											<a href="<?php echo site_url(); ?>/dashboard/" class="active"> <i class="fa fa-dashboard icon"> <b class="bg-danger"></b> </i>  <span>Dashboard</span></a>
-											<?php 
-											if($user_level==1){ 
-											?>
-											<ul class="nav lt">
-												<li><a href="<?php echo site_url(); ?>/dashboard/"> <i class="fa fa-angle-right"></i>  <span>Dashboard</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/dashboard/narative_report"> <i class="fa fa-angle-right"></i>  <span>Narative Report</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/report/finance_week/dashboad_week"> <i class="fa fa-angle-right"></i>  <span>Weekly Progress</span></a></li>
-											</ul>
-											<?php } ?>
-											<ul class="nav lt">								
-												<li><a href="<?php echo site_url(); ?>/topsheet/schedule/"> <i class="fa fa-angle-right"></i>  <span>Schedule</span></a></li>	
-												</ul>
-										</li>
-										<?php 
-										if($user_level==2 OR $user_level==3){ $menu_branch="active"; }
-										?>
-										<li class="<?php echo $menu_branch; ?>">
-											<a href="#layout"> <i class="fa fa-building-o icon"> <b class="bg-info"></b> </i>  <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span>  <span>Kantor Cabang</span></a>
-											<ul class="nav lt">
-												<li><a href="<?php echo site_url(); ?>/branch/group"> <i class="fa fa-angle-right"></i>  <span>Majelis</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/branch/client"> <i class="fa fa-angle-right"></i>  <span>Anggota</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/branch/pengajuan"> <i class="fa fa-angle-right"></i>  <span>Pengajuan</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/branch/pencairan"> <i class="fa fa-angle-right"></i>  <span>Pencairan</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/branch/monitoring_pembiayaan"> <i class="fa fa-angle-right"></i>  <span>Monitoring</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/branch/client_unreg_list"> <i class="fa fa-angle-right"></i>  <span>Anggota Keluar</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/branch/kas"> <i class="fa fa-angle-right"></i>  <span>Laporan Kas</span></a></li>												
-												<li><a href="<?php echo site_url(); ?>/report"> <i class="fa fa-angle-right"></i>  <span>Laporan Mingguan</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/officer"> <i class="fa fa-angle-right"></i>  <span>Pendamping Lapangan</span></a></li>
-											</ul>
-										</li>
-										<?php if($user_level==1){ ?>
-										<li class="<?php echo $menu_client; ?>">
-											<a href="#layout"> <i class="fa fa-male icon"> <b class="bg-warning"></b> </i>  <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span>  <span>Anggota</span></a>
-											<ul class="nav lt">
-												<li><a href="<?php echo site_url(); ?>/branch/client"> <i class="fa fa-angle-right"></i>  <span>Data Anggota</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/branch/client_reg"> <i class="fa fa-angle-right"></i>  <span>Registrasi Anggota</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/pembiayaan"> <i class="fa fa-angle-right"></i>  <span>Pembiayaan</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/pembiayaan/par"> <i class="fa fa-angle-right"></i>  <span>P A R</span></a></li>
-											</ul>
-										</li>
-										<li class="<?php echo $menu_group; ?>">
-											<a href="#layout"> <i class="fa fa-group icon"> <b class="bg-warning dker"></b> </i>  <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span>  <span>Majelis</span></a>
-											<ul class="nav lt">
-												<li><a href="<?php echo site_url(); ?>/branch/group"> <i class="fa fa-angle-right"></i>  <span>Data Majelis</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/group/register"> <i class="fa fa-angle-right"></i>  <span>Registrasi Majelis</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/branch/group_performance"> <i class="fa fa-angle-right"></i>  <span>Kehadiran Majelis</span></a></li>
-											</ul>
-										</li>
-										<li class="<?php echo $menu_investor; ?>">
-											<a href="#layout"> <i class="fa fa-usd icon"> <b class="bg-warning dker"></b> </i>  <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span>  <span>Investor</span></a>
-											<ul class="nav lt">
-												<li><a href="<?php echo site_url(); ?>/lenders"> <i class="fa fa-angle-right"></i>  <span>Data Investor</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/lenders/registration"> <i class="fa fa-angle-right"></i>  <span>Registrasi Investor</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/lenders/investment"> <i class="fa fa-angle-right"></i>  <span>Data Investasi</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/lenders/investment_recap"> <i class="fa fa-angle-right"></i>  <span>Rekap Investasi</span></a></li>
-											</ul>
-										</li>
-										<!--<li class="<?php echo $menu_office; ?>">
-											<a href="#uikit"> <i class="fa fa-building-o icon"> <b class="bg-success"></b> </i>  <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span>  <span>Kantor Cabang</span></a>
-											<ul class="nav lt">
-												<li><a href="<?php echo site_url(); ?>/officer/"> <i class="fa fa-angle-right"></i>  <span>Pendamping Lapangan</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/branch/"> <i class="fa fa-angle-right"></i>  <span>Kantor Cabang</span></a></li>
-											</ul>
-										</li>-->
-										<?php } ?>
-										<li class="<?php echo $menu_transaksi; ?>">
-											<a href="#uikit"> <i class="fa fa-money icon"> <b class="bg-success"></b> </i>  <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span>  <span>Transaksi</span></a>
-											<ul class="nav lt">
-												<li><a href="<?php echo site_url(); ?>/topsheet/"> <i class="fa fa-angle-right"></i>  <span>Top Sheet</span></a></li>												
-												<?php if($user_level==1 OR $user_level==3 OR $user_level==2){ ?>
-												<li><a href="<?php echo site_url(); ?>/topsheet/tsdaily/"> <i class="fa fa-angle-right"></i>  <span>Rekap Topsheet</span></a></li>												
-												<!--<li><a href="<?php echo site_url(); ?>/topsheet/tsdaily_report/"> <i class="fa fa-angle-right"></i>  <span>Rekap Harian </span></a></li>-->
-												<li><a href="<?php echo site_url(); ?>/topsheet/ts_report/tsdaily_report"> <i class="fa fa-angle-right"></i>  <span>Rekap Harian </span></a></li>										
-												<li><a href="<?php echo site_url(); ?>/topsheet/tsdaily_apel/"> <i class="fa fa-angle-right"></i>  <span>Rekap Topsheet (Apel)</span></a></li>										
-												<li><a href="<?php echo site_url(); ?>/topsheet/schedule/"> <i class="fa fa-angle-right"></i>  <span>Schedule</span></a></li>																								
-												<?php } ?>
-											</ul>
-										</li>
-										<?php if($user_level==1 OR $user_level==2 OR $user_level==3 ){ ?>
-										<li class="<?php echo $menu_saving; ?>">
-											<a href="#uikit"> <i class="fa fa-book icon"> <b class="bg-success dker"></b> </i>  <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span>  <span>Tabungan</span></a>
-											<ul class="nav lt">
-												<li><a href="<?php echo site_url(); ?>/saving/tabwajib"> <i class="fa fa-angle-right"></i>  <span>Tabungan Wajib</span></a></li>												
-												<li><a href="<?php echo site_url(); ?>/saving/tabsukarela"> <i class="fa fa-angle-right"></i>  <span>Tabungan Sukarela</span></a></li>												
-												<li><a href="<?php echo site_url(); ?>/tabberjangka/"> <i class="fa fa-angle-right"></i>  <span>Tabungan Berjangka</span></a></li>											
-											</ul>
-										</li>
-										<?php } ?>
-										<?php if($user_level==1 OR $user_level==3 OR $user_level==5){ ?>
-										<li class="<?php echo $menu_jurnal; ?>">
-											<a href="#pages"> <i class="fa fa-file-text icon"> <b class="bg-primary"></b> </i>  <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span>  <span>Accounting</span> 
-											</a>
-											<ul class="nav lt">
-												<li><a href="<?php echo site_url(); ?>/accounting/jurnal"> <i class="fa fa-angle-right"></i>  <span>Jurnal</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/accounting/neraca"> <i class="fa fa-angle-right"></i>  <span>Neraca</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/accounting/laba_rugi"> <i class="fa fa-angle-right"></i>  <span>Laba Rugi</span></a></li>
-												<!--<li><a href="<?php echo site_url(); ?>/accounting/neraca_simple"> <i class="fa fa-angle-right"></i>  <span>Neraca Simple</span></a></li>-->
-												<!--<li><a href="<?php echo site_url(); ?>/accounting/laporan_keuangan"> <i class="fa fa-angle-right"></i>  <span>Laporan Keuangan</span></a></li>-->
-												<li><a href="<?php echo site_url(); ?>/accounting/general_ledger"> <i class="fa fa-angle-right"></i>  <span>Buku Besar</span></a></li>
-												<!--<li><a href="<?php echo site_url(); ?>/accounting/laporan_arus_kas"> <i class="fa fa-angle-right"></i>  <span>Laporan Arus Kas</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/accounting/laporan_ekuitas"> <i class="fa fa-angle-right"></i>  <span>Laporan Ekuitas</span></a></li>
-												-->
-												<li><a href="<?php echo site_url(); ?>/bukukas/kaskecil"> <i class="fa fa-angle-right"></i>  <span>Kas Kecil</span></a></li>
-												<!--<li><a href="<?php echo site_url(); ?>/accounting/laporan_shu"> <i class="fa fa-angle-right"></i>  <span>Laporan SHU</span></a></li>-->
-											</ul>
-										</li>
-										<?php } ?>
-										<?php if($user_level==1 OR $user_level==5){ ?>
-										<li class="<?php echo $menu_report; ?>">
-											<a href="#pages"> <i class="fa fa-file-text icon"> <b class="bg-primary dker"></b> </i>  <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span><span>Report</span></a>											
-											<ul class="nav lt">
-												<li><a href="<?php echo site_url(); ?>/report/finance"> <i class="fa fa-angle-right"></i>  <span>Finance</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/report/audit"> <i class="fa fa-angle-right"></i>  <span>Audit</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/report/operation"> <i class="fa fa-angle-right"></i>  <span>Operation</span></a></li>
 
-											</ul>
-										</li>
-										<?php } ?>
-										<?php if($user_level==1 OR $user_level==5){ ?>
-										<li class="<?php echo $menu_konsolidasi; ?>">
-											<a href="#pages"> <i class="fa fa-file-text icon"> <b class="bg-primary dker"></b> </i>  <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span><span>Konsolidasi</span></a>											
-											<ul class="nav lt">
-												<li><a href="<?php echo site_url(); ?>/konsolidasi/neraca"> <i class="fa fa-angle-right"></i>  <span>Neraca</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/konsolidasi/laba_rugi"> <i class="fa fa-angle-right"></i>  <span>Laba Rugi</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/portfolio/par"> <i class="fa fa-angle-right"></i>  <span>Portfolio</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/asuransi"> <i class="fa fa-angle-right"></i>  <span>Asuransi</span></a></li> 
-												<li><a href="<?php echo site_url(); ?>/insentif"> <i class="fa fa-angle-right"></i>  <span>Insentif</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/regpyd/download"> <i class="fa fa-angle-right"></i>  <span>REGPYD</span></a></li>
-											</ul>
-										</li>
-										<?php } ?>
-										<?php if($user_level==1){ ?>
-										<li class="<?php echo $menu_setting; ?>">
-											<a href="#pages"> <i class="fa fa-cog icon"> <b class="bg-primary dker"></b> </i>  <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i> </span><span>Settings</span></a>											
-											<ul class="nav lt">
-												<li><a href="<?php echo site_url(); ?>/setting/branch"> <i class="fa fa-angle-right"></i>  <span>Setting Branch</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/setting/area"> <i class="fa fa-angle-right"></i>  <span>Setting Area</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/setting/target_ops"> <i class="fa fa-angle-right"></i>  <span>Setting Target Params</span></a></li>
-												<li><a href="<?php echo site_url(); ?>/users"> <i class="fa fa-angle-right"></i>  <span>User Account</span></a></li>
-											</ul>
-										</li>
-										<?php } ?>
-									</ul>
-								</nav>
-								<!-- / nav -->
-							</div>
-						</section>
-						<footer class="footer lt hidden-xs b-t b-dark">
-							<!--
-							<div id="chat" class="dropup">
-								<section class="dropdown-menu on aside-md m-l-n">
-									<section class="panel bg-white">
-										<header class="panel-heading b-b b-light">Active chats</header>
-										<div class="panel-body animated fadeInRight">
-											<p class="text-sm">No active chats.</p>
-											<p><a href="#" class="btn btn-sm btn-default">Start a chat</a>
-											</p>
-										</div>
-									</section>
-								</section>
-							</div>
-							<div id="invite" class="dropup">
-								<section class="dropdown-menu on aside-md m-l-n">
-									<section class="panel bg-white">
-										<header class="panel-heading b-b b-light">John <i class="fa fa-circle text-success"></i> 
-										</header>
-										<div class="panel-body animated fadeInRight">
-											<p class="text-sm">No contacts in your lists.</p>
-											<p><a href="#" class="btn btn-sm btn-facebook"><i class="fa fa-fw fa-facebook"></i> Invite from Facebook</a>
-											</p>
-										</div>
-									</section>
-								</section>
-							</div>
-							--><?php echo "<small class='pull-left'><br/>".$this->benchmark->elapsed_time()." | ".$this->benchmark->memory_usage()."</small>";?>
-							<a href="#nav" data-toggle="class:nav-xs" class="pull-right btn btn-sm btn-dark btn-icon"> <i class="fa fa-angle-left text"></i>  <i class="fa fa-angle-right text-active"></i> 
-							</a>
-							<!--
-							<div class="btn-group hidden-nav-xs">
-								<button type="button" title="Chats" class="btn btn-icon btn-sm btn-dark" data-toggle="dropdown" data-target="#chat"><i class="fa fa-comment-o"></i>
-								</button>
-								<button type="button" title="Contacts" class="btn btn-icon btn-sm btn-dark" data-toggle="dropdown" data-target="#invite"><i class="fa fa-facebook"></i>
-								</button>
-							</div>
-							-->
-						</footer>
-					</section>
-				</aside>
-				<!-- /.aside -->
-				
-				<!-- CONTENT -->
-				<section id="content">
-					<section class="vbox">
-						<section class="scrollable padder">
-					<?php echo $template['body']; ?>
-					
-	
-						</section>
-					</section>
-					<a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
-				</section>
-				<aside class="bg-light lter b-l aside-md hide" id="notes">
-					<div class="wrapper">Notification</div>
-				</aside>
-			</section>
-		</section>
-	</section>
-	<script src="<?php echo $this->template->get_theme_path(); ?>/js/app.v2.js"></script>
-	<!-- Bootstrap -->
-	<!-- App -->
-	<script src="<?php echo $this->template->get_theme_path(); ?>/js/charts/easypiechart/jquery.easy-pie-chart.js" cache="false"></script>
-	<script src="<?php echo $this->template->get_theme_path(); ?>/js/datepicker/bootstrap-datepicker.js" cache="false"></script>
-	<script src="<?php echo $this->template->get_theme_path(); ?>/js/charts/sparkline/jquery.sparkline.min.js" cache="false"></script>
-	<script src="<?php echo $this->template->get_theme_path(); ?>/js/charts/flot/jquery.flot.min.js" cache="false"></script>
-	<script src="<?php echo $this->template->get_theme_path(); ?>/js/charts/flot/jquery.flot.tooltip.min.js" cache="false"></script>
-	<script src="<?php echo $this->template->get_theme_path(); ?>/js/charts/flot/jquery.flot.resize.js" cache="false"></script>
-	<script src="<?php echo $this->template->get_theme_path(); ?>/js/charts/flot/jquery.flot.grow.js" cache="false"></script>
-	<script src="<?php echo $this->template->get_theme_path(); ?>/js/charts/flot/demo.js" cache="false"></script>
-	<script src="<?php echo $this->template->get_theme_path(); ?>/js/calendar/bootstrap_calendar.js" cache="false"></script>
-	<script src="<?php echo $this->template->get_theme_path(); ?>/js/calendar/demo.js" cache="false"></script>
-	<script src="<?php echo $this->template->get_theme_path(); ?>/js/sortable/jquery.sortable.js" cache="false"></script>
-	<script src="<?php echo $this->template->get_theme_path(); ?>/js/priceformat/jquery.price_format.2.0.min.js" cache="false"></script>
-	<script src="<?php echo $this->template->get_theme_path(); ?>/js/jquery.table2excel.min.js" cache="false"></script>
-	
-	<script>
-		function confirmDialog() {
-			return confirm("Are you sure you want to delete this record?")
-		}
-		
-		function confirmSave() {
-			return confirm("Are you sure you want to save this record?")
-		}
-		function confirmSaving() {
-			return confirm("Are you sure you want to open Saving Account?")
-		}
-		$( document ).ready(function() {
-			$('.priceformat').priceFormat({
-				prefix: '',
-				centsSeparator: ',',
-				thousandsSeparator: '.',
-				centsLimit: 0,
-			});
-		});
-	</script>
-	
+  </head>
+  <body>
+  <!-- Start Page Loading -->
+  <div class="loading"><img src="<?php echo $this->template->get_theme_path(); ?>img/loading.gif" alt="loading-img"></div>
+  <!-- End Page Loading -->
+ <!-- //////////////////////////////////////////////////////////////////////////// -->
+  <!-- START TOP -->
+  <div id="top" class="clearfix">
+
+    <!-- Start App Logo -->
+    <div class="applogo">
+      <a href="/" class="logo">Investor MIS</a>
+    </div>
+    <!-- End App Logo -->
+
+    <!-- Start Sidebar Show Hide Button -->
+    <a href="#" class="sidebar-open-button"><i class="fa fa-bars"></i></a>
+    <a href="#" class="sidebar-open-button-mobile"><i class="fa fa-bars"></i></a>
+    <!-- End Sidebar Show Hide Button -->
+
+    <!-- Start Sidepanel Show-Hide Button -->
+    <a href="#sidepanel" class="sidepanel-open-button"><i class="fa fa-outdent"></i></a>
+    <!-- End Sidepanel Show-Hide Button -->
+
+    <!-- Start Top Right -->
+    <ul class="top-right">
+
+    <li class="dropdown link">
+      <a href="#" data-toggle="dropdown" class="dropdown-toggle profilebox"><img src="<?php echo $this->template->get_theme_path(); ?>img/profileimg.png" alt="img"><b>Jonathan Doe</b><span class="caret"></span></a>
+        <ul class="dropdown-menu dropdown-menu-list dropdown-menu-right">
+          <li role="presentation" class="dropdown-header">Profile</li>
+          <li><a href="#"><i class="fa falist fa-inbox"></i>Inbox<span class="badge label-danger">4</span></a></li>
+          <li><a href="#"><i class="fa falist fa-file-o"></i>Files</a></li>
+          <li><a href="#"><i class="fa falist fa-wrench"></i>Settings</a></li>
+          <li class="divider"></li>
+          <li><a href="#"><i class="fa falist fa-lock"></i> Lockscreen</a></li>
+          <li><a href="#"><i class="fa falist fa-power-off"></i> Logout</a></li>
+        </ul>
+    </li>
+
+    </ul>
+    <!-- End Top Right -->
+
+  </div>
+  <!-- END TOP -->
+ <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- START SIDEBAR -->
+<div class="sidebar clearfix">
+
+<ul class="sidebar-panel nav">
+  <li><a href="<?php echo site_url(); ?>"><span class="icon color5"><i class="fa fa-home"></i></span>Dashboard</a></li>
+</ul>
+
+<ul class="sidebar-panel nav">
+  <li class="sidetitle">Summary</li>
+  <li><a href=""><span class="icon color8"><i class="fa fa-bar-chart"></i></span>Overview<span class="caret"></span></a>
+    <ul>
+      <li><a href="basic-table.html">Graphical Summary</a></li>
+      <li><a href="data-table.html">Customers Portfolios</a></li>
+      <li><a href="data-table.html">Financing Portfolios
+      </a></li>
+      <li><a href="data-table.html">Financing Sectors</a></li>
+      <li><a href="data-table.html">Portfolio at Risk (PAR)</a></li>
+    </ul>
+  </li>
+</ul>
+
+<ul class="sidebar-panel nav">
+  <li class="sidetitle">Performance</li>
+  <li><a href="#"><span class="icon color10"><i class="fa fa-file-text-o"></i></span>Overview<span class="caret"></span></a>
+    <ul>
+      <li><a href="form-elements.html">Groups</a></li>
+      <li><a href="layouts.html">Members</a></li>
+      <li><a href="text-editors.html">Single Customer</a></li>
+    </ul>
+  </li>
+</ul>
+
+<div class="sidebar-plan">
+  Progress<a href="#" class="link">Fund Channeling</a>
+  <div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+  </div>
+</div>
+<span class="space">Rp 8,000,000 / Rp 10,000,000</span>
+</div>
+
+</div>
+<!-- END SIDEBAR -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+ <!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- START CONTENT -->
+<div class="content">
+
+  <!-- Start Page Header -->
+  <div class="page-header">
+    <h1 class="title">Dashboard</h1>
+      <ol class="breadcrumb">
+        <li class="active">This is a quick overview of some features</li>
+    </ol>
+
+    <!-- Start Page Header Right Div -->
+    <div class="right">
+      <div class="btn-group" role="group" aria-label="...">
+        <a href="" class="btn btn-light">Dashboard</a>
+        <a href="#" class="btn btn-light"><i class="fa fa-refresh"></i></a>
+        <a href="#" class="btn btn-light"><i class="fa fa-search"></i></a>
+        <a href="#" class="btn btn-light" id="topstats"><i class="fa fa-line-chart"></i></a>
+      </div>
+    </div>
+    <!-- End Page Header Right Div -->
+
+  </div>
+  <!-- End Page Header -->
+
+ <!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- START CONTAINER -->
+<div class="container-widget">
+
+  <!-- Start Top Stats -->
+  <div class="col-md-12">
+  <ul class="topstats clearfix">
+    <li class="arrow"></li>
+    <li class="col-xs-6 col-lg-2">
+      <span class="title"><i class="fa fa-dot-circle-o"></i> Today Profit</span>
+      <h3>$36.45</h3>
+      <span class="diff"><b class="color-down"><i class="fa fa-caret-down"></i> 26%</b> from yesterday</span>
+    </li>
+    <li class="col-xs-6 col-lg-2">
+      <span class="title"><i class="fa fa-calendar-o"></i> This Week</span>
+      <h3>$96.25</h3>
+      <span class="diff"><b class="color-up"><i class="fa fa-caret-up"></i> 26%</b> from last week</span>
+    </li>
+    <li class="col-xs-6 col-lg-2">
+      <span class="title"><i class="fa fa-shopping-cart"></i> Total Sales</span>
+      <h3 class="color-up">696</h3>
+      <span class="diff"><b class="color-up"><i class="fa fa-caret-up"></i> 26%</b> from last month</span>
+    </li>
+    <li class="col-xs-6 col-lg-2">
+      <span class="title"><i class="fa fa-users"></i> Visitors</span>
+      <h3>960</h3>
+      <span class="diff"><b class="color-down"><i class="fa fa-caret-down"></i> 26%</b> from yesterday</span>
+    </li>
+    <li class="col-xs-6 col-lg-2">
+      <span class="title"><i class="fa fa-eye"></i> Page View</span>
+      <h3 class="color-up">46.230</h3>
+      <span class="diff"><b class="color-down"><i class="fa fa-caret-down"></i> 26%</b> from yesterday</span>
+    </li>
+    <li class="col-xs-6 col-lg-2">
+      <span class="title"><i class="fa fa-clock-o"></i> Avarage Time</span>
+      <h3 class="color-down">2:10<small>min</small></h3>
+      <span class="diff"><b class="color-up"><i class="fa fa-caret-up"></i> 26%</b> from last week</span>
+    </li>
+  </ul>
+  </div>
+  <!-- End Top Stats -->
+
+
+  <!-- Start First Row -->
+  <div class="row">
+    <?php echo $template['body']; ?>
+  </div>
+
+  <div class="row">
+
+    <!-- Start Chart Daily -->
+    <div class="col-md-12 col-lg-6">
+      <div class=" panel-widget widget chart-with-stats clearfix" style="height:450px;">
+        <div class="col-sm-12" style="height:450px;">
+          <h4 class="title">TODAY SALES<small>Last update: 1 Hours ago</small></h4>
+          <div class="top-label"><h2>11.291</h2><h4>Today Total</h4></div>
+          <div class="bigchart" id="todaysales"></div>
+        </div>
+        <div class="right" style="height:450px;">
+          <h4 class="title">PAGE VIEW</h4>
+          <!-- start stats -->
+          <ul class="widget-inline-list clearfix">
+            <li class="col-12"><span>962</span>Themeforest<i class="chart sparkline-green"></i></li>
+            <li class="col-12"><span>367</span>Codecanyon<i class="chart sparkline-blue"></i></li>
+            <li class="col-12"><span>92</span>Photodune<i class="chart sparkline-red"></i></li>
+          </ul>
+          <!-- end stats -->
+        </div>
+      </div>
+    </div>
+    <!-- End Chart Daily -->
+
+    <!-- Start Server Status -->
+    <div class="col-md-12 col-lg-6">
+      <div class="panel panel-widget" style="height:380px;">
+        <div class="panel-title">
+          SERVER STATUS <span class="label label-default">196</span>
+          <ul class="panel-tools panel-tools-hover">
+            <li><a class="icon"><i class="fa fa-refresh"></i></a></li>
+            <li><a class="icon closed-tool"><i class="fa fa-times"></i></a></li>
+          </ul>
+        </div>
+        <div class="panel-body">
+          <ul class="widget-inline-list clearfix">
+            <li class="col-3 color10"><span>28.9GB</span>Total Usage</li>
+            <li class="col-3"><span>92%</span>Space Left</li>
+            <li class="col-3 color7"><span>22%</span>CPU</li>
+            <li class="col-3"><span>512MB</span>Total RAM</li>
+          </ul>
+
+          <div id="realtime" class="flotchart-placeholder" style="height:190px;"></div>
+
+        </div>
+      </div>
+    </div>
+    <!-- End Server Status -->
+
+  </div>
+  <!-- End First Row -->
+
+
+  <!-- Start Third Row -->
+  <div class="row">
+
+
+    <!-- Start General Stats -->
+    <div class="col-md-12 col-lg-6">
+      <div class="panel panel-widget" style="height:205px;">
+        <div class="panel-title">
+          General Stats
+        </div>
+        <div class="panel-body">
+
+          <div class="easypie margin-b-50" data-percent="82"><span>82%</span>New Visit</div>
+          <div class="easypie margin-b-50" data-percent="30"><span>30%</span>Order</div>
+          <div class="easypie margin-b-50 margin-b-40" data-percent="62"><span>62%</span>Page View</div>
+          <div class="easypie margin-b-50" data-percent="15"><span>15%</span>Client</div>
+          <div class="easypie margin-b-50" data-percent="45"><span>45%</span>Storage</div>
+          <div class="easypie margin-b-50" data-percent="75"><span>76%</span>Comments</div>
+
+        </div>
+      </div>
+    </div>
+    <!-- End General Stats -->
+
+    <!-- Start TwitterBox -->
+    <div class="col-md-6 col-lg-3">
+      <div class="widget socialbox" style="background:#02A8F3; height:205px;">
+
+        <p class="text">
+          Never in all their history have men been able truly...
+        </p>
+        <p class="text-info">22 May, 2015 via mobile</p>
+
+        <div class="logo"><i class="fa fa-twitter"></i></div>
+
+        <ul class="info">
+          <li><i class="fa fa-retweet"></i>694</li>
+          <li><i class="fa fa-star-o"></i>2.192</li>
+        </ul>
+
+      </div>
+    </div>
+    <!-- End TwitterBox -->
+
+    <!-- Start FacebookBox -->
+    <div class="col-md-6 col-lg-3">
+      <div class="widget socialbox" style="background:#47639E; height:205px;">
+
+        <p class="text">
+          Science has not yet mastered prophecy.
+        </p>
+        <p class="text-info">22 May, 2015 via mobile</p>
+
+        <div class="logo"><i class="fa fa-facebook"></i></div>
+
+        <ul class="info">
+          <li><i class="fa fa-thumbs-up"></i>694</li>
+          <li><i class="fa fa-comment"></i>2.192</li>
+        </ul>
+
+      </div>
+    </div>
+    <!-- End FacebookBox -->
+
+  </div>
+  <!-- End Third Row -->
+
+
+  <!-- Start Fourth Row -->
+  <div class="row">
+
+    <!-- Start Orders -->
+    <div class="col-md-12 col-lg-12">
+      <div class="panel panel-widget">
+        <div class="panel-title">
+          LAST ORDERS <span class="label label-warning">196</span>
+          <ul class="panel-tools">
+            <li><a class="icon search-tool"><i class="fa fa-search"></i></a></li>
+            <li><a class="icon minimise-tool"><i class="fa fa-minus"></i></a></li>
+            <li><a class="icon expand-tool"><i class="fa fa-expand"></i></a></li>
+            <li><a class="icon closed-tool"><i class="fa fa-times"></i></a></li>
+          </ul>
+        </div>
+
+        <div class="panel-search">
+          <form>
+            <input type="text" class="form-control" placeholder="Search...">
+            <i class="fa fa-search icon"></i>
+          </form>
+        </div>
+
+
+        <div class="panel-body table-responsive">
+
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <td class="text-center"><i class="fa fa-trash"></i></td>
+                <td>Order ID</td>
+                <td>Product</td>
+                <td>Buyer</td>
+                <td>Date</td>
+                <td>Payment</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center"><div class="checkbox margin-t-0"><input id="checkbox1" type="checkbox"><label for="checkbox1"></label></div></td>
+                <td># <b>9652</b></td>
+                <td>Kode Gaming Laptop</td>
+                <td>John Doe</td>
+                <td>12/10/2015</td>
+                <td>Credit Card</td>
+              </tr>
+              <tr>
+                <td class="text-center"><div class="checkbox margin-t-0"><input id="checkbox2" type="checkbox"><label for="checkbox2"></label></div></td>
+                <td># <b>1963</b></td>
+                <td>New Season Jacket</td>
+                <td>Jane Doe</td>
+                <td>12/10/2015</td>
+                <td>Paypal</td>
+              </tr>
+              <tr>
+                <td class="text-center"><div class="checkbox margin-t-0"><input id="checkbox3" type="checkbox"><label for="checkbox3"></label></div></td>
+                <td># <b>9652</b></td>
+                <td>IO Mouse</td>
+                <td>Jonathan Doe</td>
+                <td>12/10/2015</td>
+                <td>Credit Card</td>
+              </tr>
+              <tr>
+                <td class="text-center"><div class="checkbox margin-t-0"><input id="checkbox4" type="checkbox"><label for="checkbox4"></label></div></td>
+                <td># <b>9651</b></td>
+                <td>Doe Bike</td>
+                <td>Jonathan Doe</td>
+                <td>12/10/2015</td>
+                <td>Credit Card</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+    <!-- End Orders -->
+
+  </div>
+  <!-- End Fourth Row -->
+
+
+  <!-- Start Fifth Row -->
+  <div class="row">
+
+
+    <!-- Start Project Stats -->
+    <div class="col-md-12 col-lg-6">
+      <div class="panel panel-widget">
+        <div class="panel-title">
+          Projects Stats <span class="label label-info">62</span>
+          <ul class="panel-tools">
+            <li><a class="icon minimise-tool"><i class="fa fa-minus"></i></a></li>
+            <li><a class="icon expand-tool"><i class="fa fa-expand"></i></a></li>
+            <li><a class="icon closed-tool"><i class="fa fa-times"></i></a></li>
+          </ul>
+        </div>
+
+        <div class="panel-search">
+          <form>
+            <input type="text" class="form-control" placeholder="Search...">
+            <i class="fa fa-search icon"></i>
+          </form>
+        </div>
+
+
+        <div class="panel-body table-responsive">
+
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <td>ID</td>
+                <td>Project</td>
+                <td>Status</td>
+                <td class="text-right">Progress</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>965</td>
+                <td>Kode Dashboard Template</td>
+                <td><span class="label label-default">Developing</span></td>
+                <td class="text-right"><span class="demo-project-stats"></span></td>
+              </tr>
+              <tr>
+                <td>620</td>
+                <td>EBI iOS Application</td>
+                <td><span class="label label-warning">Design</span></td>
+                <td class="text-right"><span class="demo-project-stats"></span></td>
+              </tr>
+              <tr>
+                <td>621</td>
+                <td>Kode Landing Page</td>
+                <td><span class="label label-info">Testing</span></td>
+                <td class="text-right"><span class="demo-project-stats"></span></td>
+              </tr>
+              <tr>
+                <td>621</td>
+                <td>John Coffe Shop Logo</td>
+                <td><span class="label label-danger">Canceled</span></td>
+                <td class="text-right"><span class="demo-project-stats"></span></td>
+              </tr>
+              <tr>
+                <td>621</td>
+                <td>BKM Website Design</td>
+                <td><span class="label label-primary">Reply waiting</span></td>
+                <td class="text-right"><span class="demo-project-stats"></span></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+    <!-- Start Project Stats -->
+
+
+    <!-- Start BlogPost -->
+    <div class="col-md-12 col-lg-6">
+      <div class="panel panel-widget blog-post">
+        <div class="panel-body">
+
+          <div class="image-div color10-bg">
+            <img src="<?php echo $this->template->get_theme_path(); ?>img/example1.jpg" class="image" alt="img">
+            <h1 class="title"><a href="#">Across the sea of space, the stars are other suns.</a></h1>
+          </div>
+          <p class="text">There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally...</p>
+          <a href="#">Read More</a>
+          <p class="author">
+            <img src="<?php echo $this->template->get_theme_path(); ?>img/profileimg.png" alt="img">
+            <span>Jonathan Doe</span>
+            Designer
+          </p>
+
+
+        </div>
+      </div>
+    </div>
+    <!-- End BlogPost -->
+
+  </div>
+  <!-- End Fifth Row -->
+
+
+
+
+</div>
+<!-- END CONTAINER -->
+ <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+<!-- Start Footer -->
+<div class="row footer">
+  <div class="col-md-6 text-left">
+  Copyright © 2015 <a href="<?php echo site_url(); ?>" target="_blank">Koperasi Amartha</a> All rights reserved.
+  </div>
+  <div class="col-md-6 text-right">
+    Design and Developed by <a href="<?php echo site_url(); ?>" target="_blank">PT Amartha Mikro Fintek. A subsidiary of Koperasi Amartha.</a>
+  </div>
+</div>
+<!-- End Footer -->
+
+
+</div>
+<!-- End Content -->
+ <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- START SIDEPANEL -->
+<div role="tabpanel" class="sidepanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="index.html#today" aria-controls="today" role="tab" data-toggle="tab">TODAY</a></li>
+    <li role="presentation"><a href="index.html#tasks" aria-controls="tasks" role="tab" data-toggle="tab">TASKS</a></li>
+    <li role="presentation"><a href="index.html#chat" aria-controls="chat" role="tab" data-toggle="tab">CHAT</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+
+    <!-- Start Today -->
+    <div role="tabpanel" class="tab-pane active" id="today">
+
+      <div class="sidepanel-m-title">
+        Today
+        <span class="left-icon"><a href="index.html#"><i class="fa fa-refresh"></i></a></span>
+        <span class="right-icon"><a href="index.html#"><i class="fa fa-file-o"></i></a></span>
+      </div>
+
+      <div class="gn-title">NEW</div>
+
+      <ul class="list-w-title">
+        <li>
+          <a href="index.html#">
+            <span class="label label-danger">ORDER</span>
+            <span class="date">9 hours ago</span>
+            <h4>New Jacket 2.0</h4>
+            Etiam auctor porta augue sit amet facilisis. Sed libero nisi, scelerisque.
+          </a>
+        </li>
+        <li>
+          <a href="index.html#">
+            <span class="label label-success">COMMENT</span>
+            <span class="date">14 hours ago</span>
+            <h4>Bill Jackson</h4>
+            Etiam auctor porta augue sit amet facilisis. Sed libero nisi, scelerisque.
+          </a>
+        </li>
+        <li>
+          <a href="index.html#">
+            <span class="label label-info">MEETING</span>
+            <span class="date">at 2:30 PM</span>
+            <h4>Developer Team</h4>
+            Etiam auctor porta augue sit amet facilisis. Sed libero nisi, scelerisque.
+          </a>
+        </li>
+        <li>
+          <a href="index.html#">
+            <span class="label label-warning">EVENT</span>
+            <span class="date">3 days left</span>
+            <h4>Birthday Party</h4>
+            Etiam auctor porta augue sit amet facilisis. Sed libero nisi, scelerisque.
+          </a>
+        </li>
+      </ul>
+
+    </div>
+    <!-- End Today -->
+
+    <!-- Start Tasks -->
+    <div role="tabpanel" class="tab-pane" id="tasks">
+
+      <div class="sidepanel-m-title">
+        To-do List
+        <span class="left-icon"><a href="index.html#"><i class="fa fa-pencil"></i></a></span>
+        <span class="right-icon"><a href="index.html#"><i class="fa fa-trash"></i></a></span>
+      </div>
+
+      <div class="gn-title">TODAY</div>
+
+      <ul class="todo-list">
+        <li class="checkbox checkbox-primary">
+          <input id="checkboxside1" type="checkbox"><label for="checkboxside1">Add new products</label>
+        </li>
+
+        <li class="checkbox checkbox-primary">
+          <input id="checkboxside2" type="checkbox"><label for="checkboxside2"><b>May 12, 6:30 pm</b> Meeting with Team</label>
+        </li>
+
+        <li class="checkbox checkbox-warning">
+          <input id="checkboxside3" type="checkbox"><label for="checkboxside3">Design Facebook page</label>
+        </li>
+
+        <li class="checkbox checkbox-info">
+          <input id="checkboxside4" type="checkbox"><label for="checkboxside4">Send Invoice to customers</label>
+        </li>
+
+        <li class="checkbox checkbox-danger">
+          <input id="checkboxside5" type="checkbox"><label for="checkboxside5">Meeting with developer team</label>
+        </li>
+      </ul>
+
+      <div class="gn-title">TOMORROW</div>
+      <ul class="todo-list">
+        <li class="checkbox checkbox-warning">
+          <input id="checkboxside6" type="checkbox"><label for="checkboxside6">Redesign our company blog</label>
+        </li>
+
+        <li class="checkbox checkbox-success">
+          <input id="checkboxside7" type="checkbox"><label for="checkboxside7">Finish client work</label>
+        </li>
+
+        <li class="checkbox checkbox-info">
+          <input id="checkboxside8" type="checkbox"><label for="checkboxside8">Call Johnny from Developer Team</label>
+        </li>
+
+      </ul>
+    </div>
+    <!-- End Tasks -->
+
+    <!-- Start Chat -->
+    <div role="tabpanel" class="tab-pane" id="chat">
+
+      <div class="sidepanel-m-title">
+        Friend List
+        <span class="left-icon"><a href="index.html#"><i class="fa fa-pencil"></i></a></span>
+        <span class="right-icon"><a href="index.html#"><i class="fa fa-trash"></i></a></span>
+      </div>
+
+      <div class="gn-title">ONLINE MEMBERS (3)</div>
+      <ul class="group">
+        <li class="member"><a href="index.html#"><img src="img/profileimg.png" alt="img"><b>Allice Mingham</b>Los Angeles</a><span class="status online"></span></li>
+        <li class="member"><a href="index.html#"><img src="img/profileimg2.png" alt="img"><b>James Throwing</b>Las Vegas</a><span class="status busy"></span></li>
+        <li class="member"><a href="index.html#"><img src="img/profileimg3.png" alt="img"><b>Fred Stonefield</b>New York</a><span class="status away"></span></li>
+        <li class="member"><a href="index.html#"><img src="img/profileimg4.png" alt="img"><b>Chris M. Johnson</b>California</a><span class="status online"></span></li>
+      </ul>
+
+      <div class="gn-title">OFFLINE MEMBERS (8)</div>
+     <ul class="group">
+        <li class="member"><a href="index.html#"><img src="img/profileimg5.png" alt="img"><b>Allice Mingham</b>Los Angeles</a><span class="status offline"></span></li>
+        <li class="member"><a href="index.html#"><img src="img/profileimg6.png" alt="img"><b>James Throwing</b>Las Vegas</a><span class="status offline"></span></li>
+      </ul>
+
+      <form class="search">
+        <input type="text" class="form-control" placeholder="Search a Friend...">
+      </form>
+    </div>
+    <!-- End Chat -->
+
+  </div>
+
+</div>
+<!-- END SIDEPANEL -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+
+<!-- ================================================
+jQuery Library
+================================================ -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/jquery.min.js"></script>
+
+<!-- ================================================
+Bootstrap Core JavaScript File
+================================================ -->
+<script src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap/bootstrap.min.js"></script>
+
+<!-- ================================================
+Plugin.js - Some Specific JS codes for Plugin Settings
+================================================ -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/plugins.js"></script>
+
+<!-- ================================================
+Bootstrap Select
+================================================ -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap-select/bootstrap-select.js"></script>
+
+<!-- ================================================
+Bootstrap Toggle
+================================================ -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+
+<!-- ================================================
+Bootstrap WYSIHTML5
+================================================ -->
+<!-- main file -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap-wysihtml5/wysihtml5-0.3.0.min.js"></script>
+<!-- bootstrap file -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+
+<!-- ================================================
+Summernote
+================================================ -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/summernote/summernote.min.js"></script>
+
+<!-- ================================================
+Flot Chart
+================================================ -->
+<!-- main file -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/flot-chart/flot-chart.js"></script>
+<!-- time.js -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/flot-chart/flot-chart-time.js"></script>
+<!-- stack.js -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/flot-chart/flot-chart-stack.js"></script>
+<!-- pie.js -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/flot-chart/flot-chart-pie.js"></script>
+<!-- demo codes -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/flot-chart/flot-chart-plugin.js"></script>
+
+<!-- ================================================
+Chartist
+================================================ -->
+<!-- main file -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/chartist/chartist.js"></script>
+<!-- demo codes -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/chartist/chartist-plugin.js"></script>
+
+<!-- ================================================
+Easy Pie Chart
+================================================ -->
+<!-- main file -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/easypiechart/easypiechart.js"></script>
+<!-- demo codes -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/easypiechart/easypiechart-plugin.js"></script>
+
+<!-- ================================================
+Sparkline
+================================================ -->
+<!-- main file -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/sparkline/sparkline.js"></script>
+<!-- demo codes -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/sparkline/sparkline-plugin.js"></script>
+
+<!-- ================================================
+Rickshaw
+================================================ -->
+<!-- d3 -->
+<script src="<?php echo $this->template->get_theme_path(); ?>js/rickshaw/d3.v3.js"></script>
+<!-- main file -->
+<script src="<?php echo $this->template->get_theme_path(); ?>js/rickshaw/rickshaw.js"></script>
+<!-- demo codes -->
+<script src="<?php echo $this->template->get_theme_path(); ?>js/rickshaw/rickshaw-plugin.js"></script>
+
+<!-- ================================================
+Data Tables
+================================================ -->
+<script src="<?php echo $this->template->get_theme_path(); ?>js/datatables/datatables.min.js"></script>
+
+<!-- ================================================
+Sweet Alert
+================================================ -->
+<script src="<?php echo $this->template->get_theme_path(); ?>js/sweet-alert/sweet-alert.min.js"></script>
+
+<!-- ================================================
+Kode Alert
+================================================ -->
+<script src="<?php echo $this->template->get_theme_path(); ?>js/kode-alert/main.js"></script>
+
+<!-- ================================================
+Gmaps
+================================================ -->
+<!-- google maps api -->
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<!-- main file -->
+<script src="<?php echo $this->template->get_theme_path(); ?>js/gmaps/gmaps.js"></script>
+<!-- demo codes -->
+<script src="<?php echo $this->template->get_theme_path(); ?>js/gmaps/gmaps-plugin.js"></script>
+
+<!-- ================================================
+jQuery UI
+================================================ -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- ================================================
+Moment.js
+================================================ -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/moment/moment.min.js"></script>
+
+<!-- ================================================
+Full Calendar
+================================================ -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/full-calendar/fullcalendar.js"></script>
+
+<!-- ================================================
+Bootstrap Date Range Picker
+================================================ -->
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/date-range-picker/daterangepicker.js"></script>
+
+<!-- ================================================
+Below codes are only for index widgets
+================================================ -->
+<!-- Today Sales -->
+<script>
+
+// set up our data series with 50 random data points
+
+var seriesData = [ [], [], [] ];
+var random = new Rickshaw.Fixtures.RandomData(20);
+
+for (var i = 0; i < 110; i++) {
+  random.addData(seriesData);
+}
+
+// instantiate our graph!
+
+var graph = new Rickshaw.Graph( {
+  element: document.getElementById("todaysales"),
+  renderer: 'bar',
+  series: [
+    {
+      color: "#33577B",
+      data: seriesData[0],
+      name: 'Photodune'
+    }, {
+      color: "#77BBFF",
+      data: seriesData[1],
+      name: 'Themeforest'
+    }, {
+      color: "#C1E0FF",
+      data: seriesData[2],
+      name: 'Codecanyon'
+    }
+  ]
+} );
+
+graph.render();
+
+var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+  graph: graph,
+  formatter: function(series, x, y) {
+    var date = '<span class="date">' + new Date(x * 1000).toUTCString() + '</span>';
+    var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + '"></span>';
+    var content = swatch + series.name + ": " + parseInt(y) + '<br>' + date;
+    return content;
+  }
+} );
+
+</script>
+
+<!-- Today Activity -->
+<script>
+// set up our data series with 50 random data points
+
+var seriesData = [ [], [], [] ];
+var random = new Rickshaw.Fixtures.RandomData(20);
+
+for (var i = 0; i < 50; i++) {
+  random.addData(seriesData);
+}
+
+// instantiate our graph!
+
+var graph = new Rickshaw.Graph( {
+  element: document.getElementById("todayactivity"),
+  renderer: 'area',
+  series: [
+    {
+      color: "#9A80B9",
+      data: seriesData[0],
+      name: 'London'
+    }, {
+      color: "#CDC0DC",
+      data: seriesData[1],
+      name: 'Tokyo'
+    }
+  ]
+} );
+
+graph.render();
+
+var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+  graph: graph,
+  formatter: function(series, x, y) {
+    var date = '<span class="date">' + new Date(x * 1000).toUTCString() + '</span>';
+    var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + '"></span>';
+    var content = swatch + series.name + ": " + parseInt(y) + '<br>' + date;
+    return content;
+  }
+} );
+</script>
+
+
+
 </body>
-
 </html>

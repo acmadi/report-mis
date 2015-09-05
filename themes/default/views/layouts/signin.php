@@ -1,30 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-dark">
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="keywords" content="bootstrap, admin, dashboard, flat admin template, responsive," />
+  <title><?php echo $menu_title; ?> | Amartha Investor MIS - Login</title>
 
-<head>
-	<meta charset="utf-8" />
-	<title>Amartha Microfinance | Login</title>
-	<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
-	<meta name="description" content="" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />	
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css' />
-	<link rel="stylesheet" href="<?php echo $this->template->get_theme_path(); ?>/css/app.v2.css" type="text/css" />
-	
-	<!--[if lt IE 9]> <script src="js/ie/html5shiv.js" cache="false"></script> <script src="js/ie/respond.min.js" cache="false"></script> <script src="js/ie/excanvas.js" cache="false"></script> <![endif]-->
-</head>
-
-<body>
-	<?php echo $template['body']; ?>
-	
-	<!-- footer -->
-	<footer id="footer">
-		<div class="text-center padder">
-			<p> <small>&copy; <?php echo date("Y");?>. Amartha Microfinance. By Kotakwarna Studio</small></p>
-		</div>
-	</footer>
-	<!-- / footer -->
-	<!-- Bootstrap -->
-	<!-- App -->
+  <!-- ========== Css Files ========== -->
+  <link href="<?php echo $this->template->get_theme_path(); ?>css/root.css" rel="stylesheet">
+  <style type="text/css">
+    body{background: #F5F5F5;}
+  </style>
+  </head>
+  <body>
+    <div class="login-form">
+    	<?php echo $template['body']; ?>
+      <div class="footer-links row">
+        <div class="col-xs-6"><a href="login.html#">
+          Copyright © 2015 <a href="<?php echo site_url(); ?>" target="_blank">Koperasi Amartha. </a>All rights reserved.
+        </div>
+      </div>
+    </div>
 </body>
-
 </html>
