@@ -18,8 +18,14 @@
     <div class="login-form">
     	<?php echo $template['body']; ?>
       <div class="footer-links row">
-        <div class="col-xs-6"><a href="login.html#">
-          Copyright © 2015 <a href="<?php echo site_url(); ?>" target="_blank">Koperasi Amartha. </a>All rights reserved.
+        <div class="col-xs-12 text-center">
+          Copyright © 2015
+        </div>
+        <div class="col-xs-12 text-center">
+          <a href="<?php echo site_url(); ?>" target="_blank">Koperasi Amartha & PT Amartha Micro Fintek. </a>
+        </div>
+        <div class="col-xs-12 text-center">
+          All rights reserved.
         </div>
       </div>
     </div>

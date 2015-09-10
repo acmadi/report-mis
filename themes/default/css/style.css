@@ -281,7 +281,7 @@ Top
 ================================================================================= */
 #top {
   height: 60px;
-  background: #399bff;
+  background: #551A8B; /*#399bff;*/
   color: #fff;
   width: 100%;
   position: fixed;
@@ -317,7 +317,7 @@ Sidebar Open Button - Show or Hide Sidebar
   width: 62px;
   text-align: center;
   float: left;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.8);
   padding-top: 19px;
   border-right: 1px solid rgba(0, 0, 0, 0.14);
   z-index: 1;
@@ -325,6 +325,7 @@ Sidebar Open Button - Show or Hide Sidebar
 .sidebar-open-button:hover,
 .sidebar-open-button:active {
   background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.8);
 }
 .sidebar-open-button-mobile {
   height: 60px;
@@ -333,13 +334,14 @@ Sidebar Open Button - Show or Hide Sidebar
   width: 62px;
   text-align: center;
   float: left;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.8);
   padding-top: 19px;
   border-right: 1px solid rgba(0, 0, 0, 0.14);
 }
 .sidebar-open-button-mobile:hover,
 .sidebar-open-button-mobile:active {
   background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.8);
 }
 /* =================================================================================
 Searchbox - Top Search Input
@@ -377,7 +379,7 @@ Searchbox - Top Search Input
   right: 15px;
 }
 /* =================================================================================
-Top Menu 
+Top Menu
 ================================================================================= */
 .topmenu {
   float: left;
@@ -454,11 +456,12 @@ Top Right
   color: rgba(255, 255, 255, 0.95);
 }
 .top-right .profilebox img {
-  width: 32px;
-  height: 31px;
-  float: left;
-  border-radius: 100%;
-  margin-right: 7px;
+  width: 132px;
+  height: 40px;
+  /*float: left;*/
+  border-radius: 0%;
+  margin-right: 10px;
+  margin-left: 20px;
   margin-top: -4px;
 }
 .top-right .profilebox .caret {
@@ -488,7 +491,7 @@ Top Right
   background: rgba(255, 255, 255, 0.95);
 }
 /* =================================================================================
-Sidebar 
+Sidebar
 ================================================================================= */
 .sidebar {
   width: 250px;
@@ -663,7 +666,7 @@ Sidebar
   display: none;
 }
 /* =================================================================================
-Sidepanel 
+Sidepanel
 ================================================================================= */
 .sidepanel {
   z-index: 9999;
@@ -872,7 +875,7 @@ Sidepanel
   margin-left: -20px;
 }
 /* =================================================================================
-Content 
+Content
 ================================================================================= */
 .content {
   padding-left: 30px;
@@ -882,7 +885,7 @@ Content
   background: #f5f5f5;
 }
 /* =================================================================================
-FOOTER 
+FOOTER
 ================================================================================= */
 .footer {
   border-top: 1px solid #e2e2e2;
@@ -898,7 +901,7 @@ FOOTER
   margin-bottom: 0;
 }
 /* =================================================================================
-Page Header 
+Page Header
 ================================================================================= */
 .page-header {
   background: #fff;
@@ -971,7 +974,7 @@ Page Header
   margin: -20px;
 }
 /* =================================================================================
-Presentation 
+Presentation
 ================================================================================= */
 .presentation {
   background: rgba(0, 0, 0, 0.05);
@@ -1750,14 +1753,14 @@ Invoice
 Login Pages
 ================================================================================= */
 .login-form {
-  width: 360px;
-  padding-top: 100px;
+  width: 320px;
+  padding-top: 20px;
   margin: 0px auto;
   text-shadow: none;
 }
 .login-form form {
   background: #fff;
-  border: 1px solid #ddd;
+  border: 0px solid #ddd;
   border-radius: 3px;
 }
 .login-form form img {
@@ -1772,7 +1775,7 @@ Login Pages
   padding: 30px 0;
 }
 .login-form form .top .icon {
-  width: 100px;
+  width: 150px;
   height: 100px;
 }
 .login-form form .top h1,
