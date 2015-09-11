@@ -39,10 +39,10 @@
     <ul class="top-right">
 
     <li class="dropdown link">
-      <a href="#" data-toggle="dropdown" class="dropdown-toggle profilebox"><b><?php echo $this->session->userdata('user_fullname'); ?></b><img src="<?php echo $this->template->get_theme_path(); ?>img/<?php echo $this->session->userdata('user_image'); ?>" alt="img"><span class="caret"></span></a>
+      <a href="#" data-toggle="dropdown" class="dropdown-toggle profilebox"><b><?php echo $this->session->userdata('investor_name'); ?></b><img src="<?php echo $this->template->get_theme_path() . 'img/' . $this->session->userdata('investor_image') ?>" alt="img"><span class="caret"></span></a>
         <ul class="dropdown-menu dropdown-menu-list dropdown-menu-right">
           <li role="presentation" class="dropdown-header">Profile</li>
-          <li><a href="<?php echo site_url('overview/user/'.''); ?>"><i class="fa falist fa-wrench"></i>Settings</a></li>
+          <li><a href="<?php echo site_url( 'overview/user/' . $this->session->userdata('investor_id') ); ?>"><i class="fa falist fa-wrench"></i>Settings</a></li>
           <li class="divider"></li>
           <li><a href="<?php if($this->session->userdata('logged_in')) { echo site_url('login/logout'); } ?>"><i class="fa falist fa-power-off"></i>Logout</a></li>
         </ul>
@@ -136,7 +136,7 @@
 <!-- Start Footer -->
 <div class="row footer">
   <div class="col-md-12 text-center">
-  Copyright © 2015 <a href="<?php echo site_url(); ?>" target="_blank">Koperasi Amartha.</a>All rights reserved.
+  Copyright © 2015 <a href="<?php echo 'http://amartha.co.id' ?>" target="_blank">Koperasi Amartha.</a>All rights reserved.
   </div>
 </div>
 <!-- End Footer -->

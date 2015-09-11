@@ -17,6 +17,30 @@ class overview_model extends MY_Model {
 		$this->db->last_query();
 	*/
 	//COUNT ANGGOTA
+	public function count_all_anggota_by_investor($inv_id, $pivotday='')
+	{
+		if($pivotday=='')
+		{
+			$day = date('Y-m-d', strtotime('now'));
+			$wheredate = "DATE(tbl_clients.client_reg_date) <= "."'".$day."'";
+		}
+		else
+		{
+			$day = $pivotday;
+			$wheredate = "DATE(tbl_clients.client_reg_date) <= "."'".$day."'";
+		}
+
+    return $this->db->select("count(*) as numrows")
+						->from('tbl_clients')
+						->where('tbl_clients.client_pembiayaan_sumber', $inv_id)
+						->where('tbl_clients.deleted', '0')
+						->where('tbl_clients.client_status', '1')
+						->where($wheredate)
+						->get()
+						->row()
+						->numrows;
+	}
+
 	public function count_clients_by_branch_by_date($branch='0', $pivotday='')
 	{
 		//echo 'ANGGOTA MODEL: '.$branch.'-'.$pivotday.'<br/>';
@@ -37,7 +61,7 @@ class overview_model extends MY_Model {
 
 		//echo 'ANGGOTA MODEL WHEREBRANCH: '.$wherebranch.'<br/>';
 		//echo 'ANGGOTA MODEL DAY: '.$day.'<br/>';
-		return $this->db->select("count(*) as numrows")
+		return $this->db->select("count(tbl_clients.client_id) as numrows")
 						->from('tbl_clients')
 						->join('tbl_branch', 'tbl_branch.branch_id = tbl_clients.client_branch', 'left')
 						->where($wherebranch)
@@ -50,6 +74,31 @@ class overview_model extends MY_Model {
 	}
 
 	//COUNT GROUPS (MAJELIS)
+	public function count_all_majelis_by_investor($inv_id, $pivotday='')
+	{
+     if($pivotday=='')
+		{
+			$day = date('Y-m-d', strtotime('now'));
+			$wheredate = "DATE(tbl_group.group_date) <= "."'".$day."'";
+		}
+		else
+		{
+			$day = $pivotday;
+			$wheredate = "DATE(tbl_group.group_date) <= "."'".$day."'";
+		}
+
+      return $this->db->select("client_group")
+					     				->distinct()
+											->from('tbl_clients')
+											->join('tbl_group', 'tbl_group.group_id = tbl_clients.client_group', 'inner')
+											->where('tbl_clients.client_pembiayaan_sumber', $inv_id)
+											->where('tbl_clients.deleted', '0')
+											->where('tbl_clients.client_status', '1')
+											->where($wheredate)
+											->get()
+											->row();
+	}
+
 	public function count_majelis_by_branch_by_date($branch='0', $pivotday='')
 	{
 		//echo 'MAJELIS MODEL: '.$branch.'-'.$pivotday.'<br/>';
@@ -87,6 +136,18 @@ class overview_model extends MY_Model {
 		return $this->db->query("SELECT * FROM  tbl_branch WHERE deleted='0'")->num_rows();
 	}
 
+	public function count_all_cabang_by_investor($inv_id)
+	{
+     return  $this->db->select("client_branch")
+					     				->distinct()
+											->from('tbl_clients')
+											->where('tbl_clients.client_pembiayaan_sumber', $inv_id)
+											->where('tbl_clients.deleted', '0')
+											->where('tbl_clients.client_status', '1')
+											->get()
+											->row();
+	}
+
 	public function list_cabang(){
 		return $this->db->select('branch_id, branch_name')->from('tbl_branch')
 						->where('deleted', '0')->get()->result_array();
@@ -102,6 +163,18 @@ class overview_model extends MY_Model {
 	public function count_all_officer()
 	{
 		return $this->db->query("SELECT * FROM  tbl_officer WHERE deleted='0'")->num_rows();
+	}
+
+	public function count_all_officer_by_investor($inv_id)
+	{
+     return  $this->db->select("client_officer")
+					     				->distinct()
+											->from('tbl_clients')
+											->where('tbl_clients.client_pembiayaan_sumber', $inv_id)
+											->where('tbl_clients.deleted', '0')
+											->where('tbl_clients.client_status', '1')
+											->get()
+											->row();
 	}
 
 	public function list_all_officer_by_branch($branch){

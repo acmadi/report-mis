@@ -12,7 +12,6 @@ class Login extends Front_Controller {
 	public function index()
 	{
 		$this->template->set('menu_title', '')
-									 ->set('project', $project )
 						       ->set('module', 'login' )
 						       ->build('login');
 
@@ -38,17 +37,18 @@ class Login extends Front_Controller {
 			$password = md5($this->input->post('password'));
 
 			//Query the database
-			$result = $this->user_model->login($username, $password);
+			$result = $this->user_model->login_investor($username, $password);
 
 			if($result)
 			{
-					$user_fullname = $result[0]->fullname;
-					$user_id = $result[0]->user_id;
+					$investor_id    = $result->lender_id;
+					$investor_name  = $result->lender_name;
+					$investor_image = $result->lender_img_path;
 
 					$this->session->set_userdata('logged_in', TRUE);
-					$this->session->set_userdata('user_fullname', $user_fullname);
-					$this->session->set_userdata('user_id', $user_id);
-					$this->session->set_userdata('user_image', 'logo_muamalat.png');
+					$this->session->set_userdata('investor_id', $investor_id);
+					$this->session->set_userdata('investor_name', $investor_name);
+					$this->session->set_userdata('investor_image', $investor_image);
 
 				//Go to Success Page
 				redirect('dashboard', 'refresh');

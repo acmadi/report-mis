@@ -1,39 +1,35 @@
 <!-- Start Top Stats -->
-<div class="row">
   <div class="col-md-12">
-  <ul class="topstats clearfix">
-    <li class="arrow"></li>
-    <li class="col-xs-6 col-lg-2">
-      <span class="title"><i class="fa fa-dot-circle-o"></i> Today's Overall Report for Investor</span>
-      <h3>$36.45</h3>
-      <span class="diff"><b class="color-down"><i class="fa fa-caret-down"></i> 26%</b> from yesterday</span>
-    </li>
-    <li class="col-xs-6 col-lg-2">
-      <span class="title"><i class="fa fa-calendar-o"></i> This Week</span>
-      <h3>$96.25</h3>
-      <span class="diff"><b class="color-up"><i class="fa fa-caret-up"></i> 26%</b> from last week</span>
-    </li>
-    <li class="col-xs-6 col-lg-2">
-      <span class="title"><i class="fa fa-shopping-cart"></i> Total Sales</span>
-      <h3 class="color-up">696</h3>
-      <span class="diff"><b class="color-up"><i class="fa fa-caret-up"></i> 26%</b> from last month</span>
-    </li>
-    <li class="col-xs-6 col-lg-2">
-      <span class="title"><i class="fa fa-users"></i> Visitors</span>
-      <h3>960</h3>
-      <span class="diff"><b class="color-down"><i class="fa fa-caret-down"></i> 26%</b> from yesterday</span>
-    </li>
-    <li class="col-xs-6 col-lg-2">
-      <span class="title"><i class="fa fa-eye"></i> Page View</span>
-      <h3 class="color-up">46.230</h3>
-      <span class="diff"><b class="color-down"><i class="fa fa-caret-down"></i> 26%</b> from yesterday</span>
-    </li>
-    <li class="col-xs-6 col-lg-2">
-      <span class="title"><i class="fa fa-clock-o"></i> Avarage Time</span>
-      <h3 class="color-down">2:10<small>min</small></h3>
-      <span class="diff"><b class="color-up"><i class="fa fa-caret-up"></i> 26%</b> from last week</span>
-    </li>
-  </ul>
+      <ul class="topstats clearfix">
+        <li class="arrow"></li>
+        <li class="col-xs-12 col-lg-3">
+          <span class="title">Anggota</span>
+          <h3><i class="fa fa-user"></i> <?php echo $total_anggota; ?></h3>
+          <span class="diff"><?php
+          if( ($total_anggota - $total_anggota_last_month) >= 0 )
+            echo '<b class="color-up"><i class="fa fa-caret-up"></i> ';
+          else
+            echo '<b class="color-down"><i class="fa fa-caret-down"></i> ';
+          echo $persentase_kenaikan_anggota.'%</b> from last month: <b>'.$total_anggota_last_month.'</b>'; ?></span>
+        </li>
+        <li class="col-xs-12 col-lg-3">
+          <span class="title">Majelis</span>
+          <h3><i class="fa fa-group"></i> <?php echo $total_majelis; ?></h3>
+          <span class="diff"><?php
+          if( ($total_majelis - $total_majelis_last_month) >= 0 )
+            echo '<b class="color-up"><i class="fa fa-caret-up"></i> ';
+          else
+            echo '<b class="color-down"><i class="fa fa-caret-down"></i> ';
+          echo $persentase_kenaikan_majelis.'%</b> from last month: <b>'.$total_majelis_last_month.'</b>'; ?></span>
+        </li>
+        <li class="col-xs-12 col-lg-3">
+          <span class="title">Total Cabang</span>
+          <h3><i class="fa fa-institution"></i> <?php echo $total_cabang; ?></h3>
+        </li>
+        <li class="col-xs-12 col-lg-3">
+          <span class="title">Total Field Officer</span>
+          <h3><i class="fa fa-male"></i> <?php echo $total_officer; ?></h3>
+        </li>
+      </ul>
   </div>
-</div>
 <!-- End Top Stats -->
