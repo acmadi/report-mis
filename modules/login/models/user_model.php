@@ -16,7 +16,7 @@ class user_model extends MY_Model {
     }
 
     public function login_investor($username, $password){
-        return $this->db->select('lender_id, lender_name, lender_img_path')
+        return $this->db->select('lender_id, lender_name, lender_img_path, lender_img_path2')
                         ->from('tbl_lenders')
                         ->where('lender_username', $username)
                         ->where('lender_password', $password)

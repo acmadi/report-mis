@@ -41,14 +41,16 @@ class Login extends Front_Controller {
 
 			if($result)
 			{
-					$investor_id    = $result->lender_id;
-					$investor_name  = $result->lender_name;
-					$investor_image = $result->lender_img_path;
+					$investor_id     = $result->lender_id;
+					$investor_name   = $result->lender_name;
+					$investor_image  = $result->lender_img_path;
+					$investor_image2 = $result->lender_img_path2;
 
 					$this->session->set_userdata('logged_in', TRUE);
 					$this->session->set_userdata('investor_id', $investor_id);
 					$this->session->set_userdata('investor_name', $investor_name);
 					$this->session->set_userdata('investor_image', $investor_image);
+					$this->session->set_userdata('investor_image2', $investor_image2);
 
 				//Go to Success Page
 				redirect('dashboard', 'refresh');

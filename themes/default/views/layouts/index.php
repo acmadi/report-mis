@@ -33,7 +33,7 @@
     <a href="#" class="sidebar-open-button-mobile"><i class="fa fa-bars"></i></a>
     <!-- End Sidebar Show Hide Button -->
 
-    <?php echo $template['partials']['right-sidepanel-button']; ?>
+    <?php //echo $template['partials']['right-sidepanel-button']; ?>
 
     <!-- Start Top Right -->
     <ul class="top-right">
@@ -71,7 +71,6 @@
       <li><a href="<?php echo site_url('overview'); ?>">Overall Report</a></li>
       <li><a href="<?php echo site_url('overview/group'); ?>">Groups</a></li>
       <li><a href="<?php echo site_url('overview/member'); ?>">Members</a></li>
-      <li><a href="<?php echo site_url('overview/customer'); ?>">Single Customer</a></li>
     </ul>
   </li>
 </ul>
@@ -136,7 +135,7 @@
 <!-- Start Footer -->
 <div class="row footer">
   <div class="col-md-12 text-center">
-  Copyright © 2015 <a href="<?php echo 'http://amartha.co.id' ?>" target="_blank">Koperasi Amartha.</a>All rights reserved.
+  Copyright © 2015 <a href="<?php echo 'http://amartha.co.id' ?>" target="_blank">Koperasi Amartha.</a> All rights reserved.
   </div>
 </div>
 <!-- End Footer -->
@@ -146,144 +145,26 @@
 <!-- End Content -->
  <!-- //////////////////////////////////////////////////////////////////////////// -->
 
-<?php echo $template['partials']['right-sidepanel']; ?>
+<?php echo //$template['partials']['right-sidepanel']; ?>
 
 <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/jquery.min.js"></script>
-<script src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap/bootstrap.min.js"></script>
 <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/plugins.js"></script>
 <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap-select/bootstrap-select.js"></script>
 <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap-toggle/bootstrap-toggle.min.js"></script>
-
 <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap-wysihtml5/wysihtml5-0.3.0.min.js"></script>
 <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
-
 <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/summernote/summernote.min.js"></script>
-
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/flot-chart/flot-chart.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/flot-chart/flot-chart-time.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/flot-chart/flot-chart-stack.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/flot-chart/flot-chart-pie.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/flot-chart/flot-chart-plugin.js"></script>
-
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/chartist/chartist.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/chartist/chartist-plugin.js"></script>
-
 <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/easypiechart/easypiechart.js"></script>
 <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/easypiechart/easypiechart-plugin.js"></script>
-
 <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/sparkline/sparkline.js"></script>
 <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/sparkline/sparkline-plugin.js"></script>
-
-<script src="<?php echo $this->template->get_theme_path(); ?>js/rickshaw/d3.v3.js"></script>
-<script src="<?php echo $this->template->get_theme_path(); ?>js/rickshaw/rickshaw.js"></script>
-<script src="<?php echo $this->template->get_theme_path(); ?>js/rickshaw/rickshaw-plugin.js"></script>
-
-<script src="<?php echo $this->template->get_theme_path(); ?>js/datatables/datatables.min.js"></script>
-
-<script src="<?php echo $this->template->get_theme_path(); ?>js/sweet-alert/sweet-alert.min.js"></script>
-<script src="<?php echo $this->template->get_theme_path(); ?>js/kode-alert/main.js"></script>
-
-<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-<script src="<?php echo $this->template->get_theme_path(); ?>js/gmaps/gmaps.js"></script>
-<script src="<?php echo $this->template->get_theme_path(); ?>js/gmaps/gmaps-plugin.js"></script>
-
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/sweet-alert/sweet-alert.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/kode-alert/main.js"></script>
 <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/jquery-ui/jquery-ui.min.js"></script>
-
 <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/moment/moment.min.js"></script>
-
 <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/full-calendar/fullcalendar.js"></script>
-
 <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/date-range-picker/daterangepicker.js"></script>
-
-<!-- Today Sales -->
-<script>
-
-// set up our data series with 50 random data points
-
-var seriesData = [ [], [], [] ];
-var random = new Rickshaw.Fixtures.RandomData(20);
-
-for (var i = 0; i < 110; i++) {
-  random.addData(seriesData);
-}
-
-// instantiate our graph!
-
-var graph = new Rickshaw.Graph( {
-  element: document.getElementById("todaysales"),
-  renderer: 'bar',
-  series: [
-    {
-      color: "#33577B",
-      data: seriesData[0],
-      name: 'Photodune'
-    }, {
-      color: "#77BBFF",
-      data: seriesData[1],
-      name: 'Themeforest'
-    }, {
-      color: "#C1E0FF",
-      data: seriesData[2],
-      name: 'Codecanyon'
-    }
-  ]
-} );
-
-graph.render();
-
-var hoverDetail = new Rickshaw.Graph.HoverDetail( {
-  graph: graph,
-  formatter: function(series, x, y) {
-    var date = '<span class="date">' + new Date(x * 1000).toUTCString() + '</span>';
-    var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + '"></span>';
-    var content = swatch + series.name + ": " + parseInt(y) + '<br>' + date;
-    return content;
-  }
-} );
-
-</script>
-
-<!-- Today Activity -->
-<script>
-// set up our data series with 50 random data points
-
-var seriesData = [ [], [], [] ];
-var random = new Rickshaw.Fixtures.RandomData(20);
-
-for (var i = 0; i < 50; i++) {
-  random.addData(seriesData);
-}
-
-// instantiate our graph!
-
-var graph = new Rickshaw.Graph( {
-  element: document.getElementById("todayactivity"),
-  renderer: 'area',
-  series: [
-    {
-      color: "#9A80B9",
-      data: seriesData[0],
-      name: 'London'
-    }, {
-      color: "#CDC0DC",
-      data: seriesData[1],
-      name: 'Tokyo'
-    }
-  ]
-} );
-
-graph.render();
-
-var hoverDetail = new Rickshaw.Graph.HoverDetail( {
-  graph: graph,
-  formatter: function(series, x, y) {
-    var date = '<span class="date">' + new Date(x * 1000).toUTCString() + '</span>';
-    var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + '"></span>';
-    var content = swatch + series.name + ": " + parseInt(y) + '<br>' + date;
-    return content;
-  }
-} );
-</script>
 
 </body>
 </html>

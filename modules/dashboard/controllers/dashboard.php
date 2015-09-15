@@ -13,8 +13,8 @@ class Dashboard extends Front_Controller{
 		{
 
 			$this->template->set('menu_title', 'Dashboard')
-										 ->set('menu_dashboard', 'active')
-							       ->build('dashboard');
+						   ->set('menu_dashboard', 'active')
+						   ->build('dashboard');
 		}
 		else
 		{

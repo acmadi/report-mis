@@ -49,6 +49,43 @@ class summary_model extends MY_Model {
 						->numrows;
 	}
 
+	//COUNT PRESENCE CLIENTS
+	public function count_presence($kehadiran, $branch, $date_start, $date_end, $inv_id)
+	{
+		/*
+		$presence_h = $this->presence_model->count_presence("h", $b->branch_id, $date_start, $date_end);
+		$presence_s = $this->presence_model->count_presence("s", $b->branch_id, $date_start, $date_end);
+		$presence_c = $this->presence_model->count_presence("c", $b->branch_id, $date_start, $date_end);
+		$presence_i = $this->presence_model->count_presence("i", $b->branch_id, $date_start, $date_end);
+		$presence_a = $this->presence_model->count_presence("a", $b->branch_id, $date_start, $date_end);
+												
+		$presentase = $presence_h / ($presence_h + $presence_s + $presence_c + $presence_i + $presence_a) * 100;			
+		*/
+		
+		if($kehadiran == "h"){ $column = "tr_absen_h";}
+		elseif($kehadiran == "s"){ $column = "tr_absen_s";}
+		elseif($kehadiran == "c"){ $column = "tr_absen_c";}
+		elseif($kehadiran == "i"){ $column = "tr_absen_i";}
+		elseif($kehadiran == "a"){ $column = "tr_absen_a";}
+		
+		return $this->db->select("sum($column) as numrows")
+						->from('tbl_transaction')
+						->join('tbl_clients', 'tbl_clients.client_id = tbl_transaction.tr_client', 'left')
+						->join('tbl_group', 'tbl_group.group_id = tbl_transaction.tr_group', 'left')
+						->join('tbl_branch', 'tbl_branch.branch_id = tbl_group.group_branch', 'left')
+						->where('tbl_transaction.deleted','0')
+						->where('tbl_clients.client_pembiayaan_sumber', $inv_id)
+						->where('tbl_clients.deleted', '0')
+						->where('tbl_clients.client_status', '1')
+						->where('tbl_branch.branch_id',$branch)
+						->where("tr_date >= '".$date_start."'")
+						->where("tr_date <= '".$date_end."'")
+						->get()
+						->row()
+						->numrows;
+						
+	}
+
 	//COUNT GROUPS (MAJELIS)
 	public function count_majelis_by_branch_by_date($branch='0', $pivotday='')
 	{
@@ -361,98 +398,6 @@ class summary_model extends MY_Model {
 		return $this->db->query($q)->row()->os_pinjaman;
 	}
 
-	//SUM OS TABUNGAN
-	//TAB SUKARELA
-	public function sum_tabsukarela_by_branch_by_date($branch='0', $pivotday='')
-	{
-		if($branch=='0')
-			$wherebranch = 'tbl_clients.client_branch BETWEEN 1 AND 6';
-		else
-			$wherebranch = 'tbl_clients.client_branch = '.$branch;
-		if($pivotday=='')
-		{
-			$day = date('Y-m-d', strtotime('now'));
-			$wheredate = "DATE(tbl_tabsukarela.tabsukarela_date) <= "."'".$day."'";
-		}
-		else
-		{
-			$day = $pivotday;
-			$wheredate = "DATE(tbl_tabsukarela.tabsukarela_date) <= "."'".$day."'";
-		}
-
-		return $this->db->select('SUM(tabsukarela_saldo) as total_saldo')
-						->from('tbl_tabsukarela')
-						->join('tbl_clients', 'tbl_clients.client_account = tbl_tabsukarela.tabsukarela_account', 'left')
-						->join('tbl_branch', 'tbl_branch.branch_id = tbl_clients.client_branch', 'left')
-						->where('tbl_tabsukarela.deleted','0')
-						->where($wheredate)
-						->where($wherebranch)
-						->where('tbl_clients.client_status', '1')
-						->get()
-						->row()
-						->total_saldo;
-	}
-
-	//TAB BERJANGKA
-	public function sum_tabberjangka_by_branch_by_date($branch='0', $pivotday='')
-	{
-		if($branch=='0')
-			$wherebranch = 'tbl_clients.client_branch BETWEEN 1 AND 6';
-		else
-			$wherebranch = 'tbl_clients.client_branch = '.$branch;
-		if($pivotday=='')
-		{
-			$day = date('Y-m-d', strtotime('now'));
-			$wheredate = "DATE(tbl_tabberjangka.tabberjangka_date) <= "."'".$day."'";
-		}
-		else
-		{
-			$day = $pivotday;
-			$wheredate = "DATE(tbl_tabberjangka.tabberjangka_date) <= "."'".$day."'";
-		}
-
-		return $this->db->select('SUM(tabberjangka_saldo) as total_saldo')
-						->from('tbl_tabberjangka')
-						->join('tbl_clients', 'tbl_clients.client_account = tbl_tabberjangka.tabberjangka_account', 'left')
-						->join('tbl_branch', 'tbl_branch.branch_id = tbl_clients.client_branch', 'left')
-						->where('tbl_tabberjangka.deleted','0')
-						->where($wheredate)
-						->where($wherebranch)
-						->where('tbl_clients.client_status', '1')
-						->get()
-						->row()
-						->total_saldo;
-	}
-
-	//TAB WAJIB
-	public function sum_tabwajib_by_branch_by_date($branch='0', $pivotday='')
-	{
-		if($branch=='0')
-			$wherebranch = 'tbl_clients.client_branch BETWEEN 1 AND 6';
-		else
-			$wherebranch = 'tbl_clients.client_branch = '.$branch;
-		if($pivotday=='')
-		{
-			$day = date('Y-m-d', strtotime('now'));
-			$wheredate = "DATE(tbl_tabwajib.tabwajib_date) <= "."'".$day."'";
-		}
-		else
-		{
-			$day = $pivotday;
-			$wheredate = "DATE(tbl_tabwajib.tabwajib_date) <= "."'".$day."'";
-		}
-
-		return $this->db->select('SUM(tabwajib_saldo) as total_saldo')
-						->from('tbl_tabwajib')
-						->join('tbl_clients', 'tbl_clients.client_account = tbl_tabwajib.tabwajib_account', 'left')
-						->join('tbl_branch', 'tbl_branch.branch_id = tbl_clients.client_branch', 'left')
-						->where('tbl_tabwajib.deleted','0')
-						->where($wheredate)
-						->where($wherebranch)
-						->where('tbl_clients.client_status', '1')
-						->get()
-						->row()
-						->total_saldo;
-	}
+	
 
 }
