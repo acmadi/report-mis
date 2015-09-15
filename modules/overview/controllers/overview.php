@@ -19,28 +19,20 @@ class Overview extends Front_Controller {
 
     public function group($id=''){
         if($this->session->userdata('logged_in'))
-        { 
-            $this->summary();
+        {
             if($id!='')
             {
-              $all_anggota_majelis_per_investor = $this->overview_model->list_all_anggota_by_majelis_by_investor( $id, $this->session->userdata('investor_id') )
+              $all_anggota_majelis_per_investor = $this->overview_model->list_all_anggota_by_majelis_by_investor( $id, $this->session->userdata('investor_id') );
               $this->template->set('menu_title', 'Group Overview')
                              ->set('menu_description', 'A Quick Overview of Group under Your Portfolios.')
                              ->set('menu_dashboard', 'active')
-                             ->set('total_anggota', $this->total_anggota)
-                             ->set('total_anggota_last_month', $this->total_anggota_last_month)
-                             ->set('persentase_kenaikan_anggota', $this->persentase_kenaikan_anggota)
-                             ->set('total_majelis', $this->total_majelis)
-                             ->set('total_majelis_last_month', $this->total_majelis_last_month)
-                             ->set('persentase_kenaikan_majelis', $this->persentase_kenaikan_majelis)
-                             ->set('total_cabang',  $this->total_cabang)
-                             ->set('total_officer', $this->total_officer)
                              //
-                             ->set('all_majelis_per_investor', $all_anggota_majelis_per_investor)
-                             ->build('group');
+                             ->set('all_anggota_majelis_per_investor', $all_anggota_majelis_per_investor)
+                             ->build('group-member');
             }
             else
             {
+              $this->summary();
               $all_majelis_per_investor = $this->overview_model->list_all_majelis_by_investor($this->session->userdata('investor_id'));
               $this->template->set('menu_title', 'Group Overview')
                              ->set('menu_description', 'A Quick Overview of Group under Your Portfolios.')
@@ -64,30 +56,26 @@ class Overview extends Front_Controller {
         }
     }
 
-    public function member($id=''){
+    public function member($id='', $branch=''){
         if($this->session->userdata('logged_in'))
         {
-            $this->summary();
             if($id!='')
-            { 
-                $all_anggota_per_investor = $this->overview_model->list_all_anggota_by_investor($this->session->userdata('investor_id'));
+            {
+                $detail_anggota_per_investor = $this->overview_model->detail_anggota_by_investor( $id );
+                $daftar_pembiayaan_anggota   = $this->overview_model->list_pembiayaan_anggota( $detail_anggota_per_investor[0]->client_id );
                 $this->template->set('menu_title', 'Member Overview')
                                ->set('menu_description', 'A Quick Overview of Members/Customers under Your Portfolios.')
                                ->set('menu_dashboard', 'active')
-                               ->set('total_anggota', $this->total_anggota)
-                               ->set('total_anggota_last_month', $this->total_anggota_last_month)
-                               ->set('persentase_kenaikan_anggota', $this->persentase_kenaikan_anggota)
-                               ->set('total_majelis', $this->total_majelis)
-                               ->set('total_majelis_last_month', $this->total_majelis_last_month)
-                               ->set('persentase_kenaikan_majelis', $this->persentase_kenaikan_majelis)
-                               ->set('total_cabang',  $this->total_cabang)
                                ->set('total_officer', $this->total_officer)
                                //
-                               ->set('all_anggota_per_investor', $all_anggota_per_investor)
-                               ->build('member');
+                               ->set('nama_cabang', $branch)
+                               ->set('detail_anggota_per_investor', $detail_anggota_per_investor)
+                               ->set('daftar_pembiayaan_anggota', $daftar_pembiayaan_anggota)
+                               ->build('member-profile');
             }
             else
             {
+                $this->summary();
                 $all_anggota_per_investor = $this->overview_model->list_all_anggota_by_investor($this->session->userdata('investor_id'));
                 $this->template->set('menu_title', 'Member Overview')
                                ->set('menu_description', 'A Quick Overview of Members/Customers under Your Portfolios.')
@@ -138,7 +126,7 @@ class Overview extends Front_Controller {
             $total_majelis               = $this->overview_model->count_all_majelis_by_investor( $this->session->userdata('investor_id') );
             $total_majelis_last_month    = $this->overview_model->count_all_majelis_by_investor( $this->session->userdata('investor_id'), $one_month_ago );
             $persentase_kenaikan_majelis = round( (($total_majelis->client_group - $total_majelis_last_month->client_group)/$total_majelis_last_month->client_group ) * 100);
-            
+
             $total_cabang  = $this->overview_model->count_all_cabang_by_investor(  $this->session->userdata('investor_id') );
             $total_officer = $this->overview_model->count_all_officer_by_investor( $this->session->userdata('investor_id') );
 

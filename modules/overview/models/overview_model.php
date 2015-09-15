@@ -33,26 +33,55 @@ class overview_model extends MY_Model {
 	{
 		$this->db->distinct();
     	$this->db->select("client_id, client_fullname, client_account, branch_name")
-				 ->from('tbl_clients')
-				 ->join('tbl_group', 'tbl_group.group_id = tbl_clients.client_group', 'left ')
-				 ->join('tbl_branch', 'tbl_branch.branch_id = tbl_clients.client_branch', 'left ')
-				 ->where('tbl_clients.client_group', $mid)
-				 ->where('tbl_clients.client_pembiayaan_sumber', $inv_id)
-				 ->where('tbl_clients.deleted', '0')
-				 ->where('tbl_clients.client_status', '1');
+							 ->from('tbl_clients')
+							 ->join('tbl_group', 'tbl_group.group_id = tbl_clients.client_group', 'left ')
+							 ->join('tbl_branch', 'tbl_branch.branch_id = tbl_clients.client_branch', 'left ')
+							 ->where('tbl_clients.client_group', $mid)
+							 ->where('tbl_clients.client_pembiayaan_sumber', $inv_id)
+							 ->where('tbl_clients.deleted', '0')
+							 ->where('tbl_clients.client_status', '1');
 		return $this->db->get()->result();
 	}
 
 	public function detail_anggota_by_investor($id)
 	{
-    	return $this->db->select("client_id, client_account, client_fullname, client_pembiayaan")
-					->from('tbl_clients')
-					->where('tbl_clients.client_id', $id)
-					->where('tbl_clients.deleted', '0')
-					->get()
-					->result();
+    	return $this->db->select("client_id, client_account, client_fullname, client_pembiayaan, client_pembiayaan_id, officer_name, branch_name, data_plafond, data_margin, data_angsuranke, data_totalangsuran, data_angsuranpokok, data_jangkawaktu, tabwajib_saldo, tabsukarela_saldo")
+											->from('tbl_clients')
+										 	->join('tbl_officer', 'tbl_officer.officer_id = tbl_clients.client_officer', 'left ')
+										 	->join('tbl_branch', 'tbl_branch.branch_id = tbl_clients.client_branch', 'left ')
+										 	->join('tbl_pembiayaan', 'tbl_pembiayaan.data_id = tbl_clients.client_pembiayaan_id')
+										 	->join('tbl_tabwajib', 'tbl_tabwajib.tabwajib_account = tbl_clients.client_account')
+										 	->join('tbl_tabsukarela', 'tbl_tabsukarela.tabsukarela_account = tbl_clients.client_account')
+											->where('tbl_clients.client_id', $id)
+											->where('tbl_clients.deleted', '0')
+											->get()
+											->result();
 	}
-		
+
+	public function list_pembiayaan_anggota($id)
+	{
+    	return $this->db
+    							->select("data_id, data_plafond, data_jangkawaktu, data_totalangsuran, data_angsuranpokok, data_margin, data_angsuranke, data_jatuhtempo")
+									->from('tbl_pembiayaan')
+									->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left ')
+									->where('tbl_clients.client_id', $id)
+									->where('tbl_clients.deleted', '0')
+									->get()
+									->result();
+	}
+
+	public function detail_pembiayaan_anggota($data_id)
+	{
+    	return $this->db
+    							->select("data_id, data_plafond, data_jangkawaktu, data_totalangsuran, data_angsuranpokok, data_margin, data_angsuranke, data_jatuhtempo")
+									->from('tbl_pembiayaan')
+									->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left ')
+									->where('tbl_clients.client_id', $data_id)
+									->where('tbl_clients.deleted', '0')
+									->get()
+									->result();
+	}
+
 	public function count_all_anggota_by_investor($inv_id, $pivotday='')
 	{
 		if($pivotday=='')
@@ -146,8 +175,8 @@ class overview_model extends MY_Model {
 			$day = $pivotday;
 			$wheredate = "DATE(tbl_group.group_date) <= "."'".$day."'";
 		}
-	  
-	  //return $this->db->query("SELECT DISTINCT group_id FROM tbl_group LEFT JOIN tbl_clients ON tbl_clients.client_group = tbl_group.group_id".  
+
+	  //return $this->db->query("SELECT DISTINCT group_id FROM tbl_group LEFT JOIN tbl_clients ON tbl_clients.client_group = tbl_group.group_id".
 	  //						  " WHERE tbl_clients.client_pembiayaan_sumber = ".$inv_id." AND tbl_clients.deleted = 0 ".
 	  //						  " AND tbl_clients.client_status = 1");
       		$this->db->distinct();

@@ -15,6 +15,24 @@
 
   </head>
   <body>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/jquery.min.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap/bootstrap.min.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/plugins.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap-select/bootstrap-select.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap-wysihtml5/wysihtml5-0.3.0.min.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/summernote/summernote.min.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/easypiechart/easypiechart.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/easypiechart/easypiechart-plugin.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/sparkline/sparkline.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/sparkline/sparkline-plugin.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/sweet-alert/sweet-alert.min.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/kode-alert/main.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/jquery-ui/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/moment/moment.min.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/full-calendar/fullcalendar.js"></script>
+  <script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/date-range-picker/daterangepicker.js"></script>
   <!-- Start Page Loading -->
   <div class="loading"><img src="<?php echo $this->template->get_theme_path(); ?>img/loading.gif" alt="loading-img"></div>
   <!-- End Page Loading -->
@@ -33,7 +51,7 @@
     <a href="#" class="sidebar-open-button-mobile"><i class="fa fa-bars"></i></a>
     <!-- End Sidebar Show Hide Button -->
 
-    <?php //echo $template['partials']['right-sidepanel-button']; ?>
+    <?php echo $template['partials']['right-sidepanel-button']; ?>
 
     <!-- Start Top Right -->
     <ul class="top-right">
@@ -82,9 +100,9 @@
       <li><a href="<?php echo site_url('summary'); ?>">General Summary</a></li>
       <li><a href="<?php echo site_url('summary/graphics'); ?>">Graphical Summary</a></li>
       <li><a href="<?php echo site_url('summary/customer_portfolio'); ?>">Customers Portfolios</a></li>
-      <li><a href="<?php echo site_url('summary/financing_portofolio'); ?>">Financing Portfolios</a></li>
+      <li><a href="<?php echo site_url('summary/financing_portfolio'); ?>">Financing Portfolios</a></li>
       <li><a href="<?php echo site_url('summary/financing_sector'); ?>">Financing Sectors</a></li>
-      <li><a href="<?php echo site_url('summary/portofolio_at_risk'); ?>">Portfolio at Risk (PAR)</a></li>
+      <li><a href="<?php echo site_url('summary/portfolio_at_risk'); ?>">Portfolio at Risk (PAR)</a></li>
     </ul>
   </li>
 </ul>
@@ -145,26 +163,7 @@
 <!-- End Content -->
  <!-- //////////////////////////////////////////////////////////////////////////// -->
 
-<?php echo //$template['partials']['right-sidepanel']; ?>
-
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/jquery.min.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap/bootstrap.min.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/plugins.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap-select/bootstrap-select.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap-toggle/bootstrap-toggle.min.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap-wysihtml5/wysihtml5-0.3.0.min.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/summernote/summernote.min.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/easypiechart/easypiechart.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/easypiechart/easypiechart-plugin.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/sparkline/sparkline.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/sparkline/sparkline-plugin.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/sweet-alert/sweet-alert.min.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/kode-alert/main.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/jquery-ui/jquery-ui.min.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/moment/moment.min.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/full-calendar/fullcalendar.js"></script>
-<script type="text/javascript" src="<?php echo $this->template->get_theme_path(); ?>js/date-range-picker/daterangepicker.js"></script>
+<?php echo $template['partials']['right-sidepanel']; ?>
 
 </body>
 </html>

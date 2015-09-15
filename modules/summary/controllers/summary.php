@@ -9,52 +9,69 @@ class Summary extends Front_Controller {
       $this->load->model('overview/overview_model');
     }
 
+    public function portfolio_at_risk(){
+        if($this->session->userdata('logged_in'))
+        {
+             $this->template->set('menu_title', 'Portfolios at Risk (PAR)')
+                            ->set('menu_description', "A Quick Overview of Your Portfolios' PAR.")
+                            ->set('menu_dashboard', 'active')
+                            ->build('portfolio_at_risk');
+        }
+        else
+        {
+            redirect('login', 'refresh');
+        }
+    }
+
+    public function financing_sector(){
+        if($this->session->userdata('logged_in'))
+        {
+             $this->template->set('menu_title', 'Financing Sector')
+                            ->set('menu_description', 'A Quick Overview of Your Portfolios.')
+                            ->set('menu_dashboard', 'active')
+                            ->build('financing_sector');
+        }
+        else
+        {
+            redirect('login', 'refresh');
+        }
+    }
+
+    public function financing_portfolio(){
+        if($this->session->userdata('logged_in'))
+        {
+             $this->template->set('menu_title', 'Financing Portfolios')
+                            ->set('menu_description', 'A Quick Overview of Your Portfolios.')
+                            ->set('menu_dashboard', 'active')
+                            ->build('financing_portfolio');
+        }
+        else
+        {
+            redirect('login', 'refresh');
+        }
+    }
+
     public function customer_portfolio(){
         if($this->session->userdata('logged_in'))
         {
             $one_month_ago      = date('Y-m-d', strtotime('previous month'));
-            $two_months_ago     = date('Y-m-d', strtotime('two months ago'));
-            $three_months_ago   = date('Y-m-d', strtotime('three months ago'));
-            $four_months_ago    = date('Y-m-d', strtotime('four months ago'));
-
-            $total_anggota                   = $this->overview_model->count_all_anggota_by_investor( $this->session->userdata('investor_id') );
-            $total_anggota_last_month        = $this->overview_model->count_all_anggota_by_investor( $this->session->userdata('investor_id'), $one_month_ago );
-            $total_anggota_last_two_month    = $this->overview_model->count_all_anggota_by_investor( $this->session->userdata('investor_id'), $two_months_ago );
-            $total_anggota_last_three_month  = $this->overview_model->count_all_anggota_by_investor( $this->session->userdata('investor_id'), $three_months_ago );
-            $total_anggota_last_four_month   = $this->overview_model->count_all_anggota_by_investor( $this->session->userdata('investor_id'), $four_months_ago );
-            $persentase_kenaikan_anggota     = round( (($total_anggota - $total_anggota_last_month)/$total_anggota_last_month ) * 100);
-
-            $total_majelis               = $this->overview_model->count_all_majelis_by_investor( $this->session->userdata('investor_id') );
-            $total_majelis_last_month    = $this->overview_model->count_all_majelis_by_investor( $this->session->userdata('investor_id'), $one_month_ago );
-            $persentase_kenaikan_majelis = round( (($total_majelis->client_group - $total_majelis_last_month->client_group)/$total_majelis_last_month->client_group ) * 100);
-            
-            $total_cabang  = $this->overview_model->count_all_cabang_by_investor(  $this->session->userdata('investor_id') );
-            $total_officer = $this->overview_model->count_all_officer_by_investor( $this->session->userdata('investor_id') );
+            $two_months_ago     = date('Y-m-d', strtotime('-2 months'));
+            $three_months_ago   = date('Y-m-d', strtotime('-3 months'));
+            $four_months_ago    = date('Y-m-d', strtotime('-4 months'));
 
             $total_anggota_aktif_pembiayaan = $this->financial_stats_model->count_anggota_aktif_pembiayaan_per_investor( $this->session->userdata('investor_id') );
             $total_anggota_aktif_menabung   = $this->financial_stats_model->count_anggota_aktif_menabung_per_investor( $this->session->userdata('investor_id') );
-            $total_anggota_keluar           = $this->financial_stats_model->count_anggota_keluar_per_investor( $this->session->userdata('investor_id') );       
+            $total_anggota_keluar           = $this->financial_stats_model->count_anggota_keluar_per_investor( $this->session->userdata('investor_id') );
             $total_monitoring               = $this->financial_stats_model->count_monitoring_pembiayaan_per_investor( $this->session->userdata('investor_id') );
 
-            $this->template->set('menu_title', 'Customer Portofolios')
-                           ->set('menu_description', 'A Quick Overview of Your Portofolios.')
+            $this->template->set('menu_title', 'Customer Portfolios')
+                           ->set('menu_description', 'A Quick Overview of Your Portfolios.')
                            ->set('menu_dashboard', 'active')
-                           ->set('total_anggota', $total_anggota)
-                           ->set('total_anggota_last_month', $total_anggota_last_month)
-                           ->set('total_anggota_last_two_month', $total_anggota_last_two_month)
-                           ->set('total_anggota_last_three_month', $total_anggota_last_three_month)
-                           ->set('total_anggota_last_four_month', $total_anggota_last_four_month)
-                           ->set('persentase_kenaikan_anggota', $persentase_kenaikan_anggota)
-                           ->set('total_majelis', $total_majelis)
-                           ->set('total_majelis_last_month', $total_majelis_last_month)
-                           ->set('persentase_kenaikan_majelis', $persentase_kenaikan_majelis)
                            ->set('total_anggota_aktif_pembiayaan', $total_anggota_aktif_pembiayaan)
                            ->set('total_anggota_aktif_menabung', $total_anggota_aktif_menabung)
                            ->set('total_anggota_keluar', $total_anggota_keluar)
                            ->set('total_monitoring', $total_monitoring)
-                           ->set('total_cabang',  $total_cabang)
-                           ->set('total_officer', $total_officer)
-                           ->build('summary');
+                           ->build('customer_portfolio');
         }
         else
         {
@@ -66,9 +83,9 @@ class Summary extends Front_Controller {
         if($this->session->userdata('logged_in'))
         {
             $one_month_ago      = date('Y-m-d', strtotime('previous month'));
-            $two_months_ago     = date('Y-m-d', strtotime('two months ago'));
-            $three_months_ago   = date('Y-m-d', strtotime('three months ago'));
-            $four_months_ago    = date('Y-m-d', strtotime('four months ago'));
+            $two_months_ago     = date('Y-m-d', strtotime('-2 months'));
+            $three_months_ago   = date('Y-m-d', strtotime('-3 months'));
+            $four_months_ago    = date('Y-m-d', strtotime('-4 months'));
 
             $total_anggota                   = $this->overview_model->count_all_anggota_by_investor( $this->session->userdata('investor_id') );
             $total_anggota_last_month        = $this->overview_model->count_all_anggota_by_investor( $this->session->userdata('investor_id'), $one_month_ago );
@@ -80,7 +97,7 @@ class Summary extends Front_Controller {
             $total_majelis               = $this->overview_model->count_all_majelis_by_investor( $this->session->userdata('investor_id') );
             $total_majelis_last_month    = $this->overview_model->count_all_majelis_by_investor( $this->session->userdata('investor_id'), $one_month_ago );
             $persentase_kenaikan_majelis = round( (($total_majelis->client_group - $total_majelis_last_month->client_group)/$total_majelis_last_month->client_group ) * 100);
-            
+
             $total_cabang  = $this->overview_model->count_all_cabang_by_investor(  $this->session->userdata('investor_id') );
             $total_officer = $this->overview_model->count_all_officer_by_investor( $this->session->userdata('investor_id') );
 
@@ -109,7 +126,7 @@ class Summary extends Front_Controller {
                            ->set('total_cabang',  $total_cabang)
                            ->set('total_officer', $total_officer)
                            //->set_partial('graph-anggota', 'partials/graph-anggota', $data_anggota)
-                           ->build('summary');
+                           ->build('summary-chart');
         }
         else
         {
@@ -129,7 +146,7 @@ class Summary extends Front_Controller {
             $total_majelis               = $this->overview_model->count_all_majelis_by_investor( $this->session->userdata('investor_id') );
             $total_majelis_last_month    = $this->overview_model->count_all_majelis_by_investor( $this->session->userdata('investor_id'), $one_month_ago );
             $persentase_kenaikan_majelis = round( (($total_majelis->client_group - $total_majelis_last_month->client_group)/$total_majelis_last_month->client_group ) * 100);
-            
+
             $total_cabang  = $this->overview_model->count_all_cabang_by_investor(  $this->session->userdata('investor_id') );
             $total_officer = $this->overview_model->count_all_officer_by_investor( $this->session->userdata('investor_id') );
 
