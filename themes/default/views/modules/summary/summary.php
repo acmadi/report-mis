@@ -1,5 +1,27 @@
+<div class="col-md-6 text-r">
+<h4>Quick Menu</h4>
+</div>
+<div class="col-md-6">
+  <ul class="panel quick-menu clearfix">
+    <li class="col-sm-2">
+      <a href="<?php echo site_url('summary/graphics'); ?>"><i class="fa fa-bar-chart"></i>Graphical Summary</a>
+    </li>
+    <li class="col-sm-3">
+      <a href="<?php echo site_url('summary/customer_portfolio'); ?>"><i class="fa fa-female"></i>Customer Portfolios</a>
+    </li>
+    <li class="col-sm-2">
+      <a href="<?php echo site_url('summary/financing_portfolio'); ?>"><i class="fa fa-book"></i>Financing Portfolios</a>
+    </li>
+    <li class="col-sm-3">
+      <a href="<?php echo site_url('summary/financing_sector'); ?>"><i class="fa fa-pie-chart"></i>Financing Sectors</a>
+    </li>
+    <li class="col-sm-2">
+      <a href="<?php echo site_url('summary/portfolio_at_risk'); ?>"><i class="fa fa-warning"></i>PAR</a>
+    </li>
+  </ul>
+</div>
 <!-- Start Summary Stats -->
-  <div class="col-md-12">
+<div class="col-md-12">
       <ul class="topstats clearfix">
         <li class="col-xs-12 col-lg-3">
           <span class="title">Anggota</span>
@@ -32,5 +54,4 @@
       </ul>
 </div>
 <!-- End Stats -->
-
 <?php //echo $template['partials']['graph-anggota']; ?>
