@@ -35,7 +35,7 @@
             new Chartist.Line('#pertambahan-anggota', {
               labels: ['".$four."', '".$three."', '".$two."', '".$one."', '".$curr."'],
               series: [
-                [".$total_anggota_last_four_month.", ".$total_anggota_last_three_month.", ".$total_anggota_last_two_month.", ".$total_anggota_last_month.", ".$total_anggota."]
+                [".intval($total_anggota_last_four_month).", ".$total_anggota_last_three_month.", ".$total_anggota_last_two_month.", ".$total_anggota_last_month.", ".$total_anggota."]
               ]
               }, {
                 scaleMinSpace: true,
@@ -47,9 +47,10 @@
             new Chartist.Line('#kehadiran-anggota', {
               labels: ['".$four."', '".$three."', '".$two."', '".$one."', '".$curr."'],
               series: [
-                [".$total_anggota_last_four_month.", ".$total_anggota_last_three_month.", ".$total_anggota_last_two_month.", ".$total_anggota_last_month.", ".$total_anggota."]
+                [".intval($persentase_hadir[4]).", ".intval($persentase_hadir[3]).", ".intval($persentase_hadir[2]).", ".intval($persentase_hadir[1]).", ".intval($persentase_hadir[0])."]
               ]
               }, {
+                high: 100,
                 scaleMinSpace: true,
                 onlyInteger: true,
                 showArea: true

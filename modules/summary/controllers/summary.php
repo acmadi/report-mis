@@ -188,15 +188,30 @@ class Summary extends Front_Controller {
             $total_anggota_last_two_month    = $this->overview_model->count_all_anggota_by_investor( $this->session->userdata('investor_id'), $two_months_ago );
             $total_anggota_last_three_month  = $this->overview_model->count_all_anggota_by_investor( $this->session->userdata('investor_id'), $three_months_ago );
             $total_anggota_last_four_month   = $this->overview_model->count_all_anggota_by_investor( $this->session->userdata('investor_id'), $four_months_ago );
-            $persentase_kenaikan_anggota     = round( (($total_anggota - $total_anggota_last_month)/$total_anggota_last_month ) * 100);
 
-            $total_majelis               = $this->overview_model->count_all_majelis_by_investor( $this->session->userdata('investor_id') );
-            $total_majelis_last_month    = $this->overview_model->count_all_majelis_by_investor( $this->session->userdata('investor_id'), $one_month_ago );
-            $persentase_kenaikan_majelis = round( (($total_majelis->client_group - $total_majelis_last_month->client_group)/$total_majelis_last_month->client_group ) * 100);
 
-            $total_cabang  = $this->overview_model->count_all_cabang_by_investor(  $this->session->userdata('investor_id') );
-            $total_officer = $this->overview_model->count_all_officer_by_investor( $this->session->userdata('investor_id') );
+            //echo date('Y-m-d', strtotime('first day of previous month')).'/';
+            //echo date('Y-m-d', strtotime('last day of previous month')).'/';
+            //echo date('Y-m-d', strtotime('first day of -2 months')).'/';
+            //echo date('Y-m-d', strtotime('last day of -2 months')).'/';
+            //echo date('Y-m-d', strtotime('last day of -1 months')).'/';
+            //echo date('Y-m-d', strtotime('first day of -0 months')).'-';
+            //echo date('Y-m-d', strtotime('last day of -0 months')).'';
+            //echo intval(NULL);
+            //die();
 
+            for($i=0; $i<5; $i++){
+              $start = 'first day of -'.$i.' months'; $end = 'last day of -'.$i.' months';
+              $presence_h[$i]  = $this->summary_model->count_presence( $this->session->userdata('investor_id'), "h", date('Y-m-d', strtotime($start)), date('Y-m-d', strtotime($end)) );
+              $presence_s[$i]  = $this->summary_model->count_presence( $this->session->userdata('investor_id'), "s", date('Y-m-d', strtotime($start)), date('Y-m-d', strtotime($end)) );
+              $presence_c[$i]  = $this->summary_model->count_presence( $this->session->userdata('investor_id'), "c", date('Y-m-d', strtotime($start)), date('Y-m-d', strtotime($end)) );
+              $presence_i[$i]  = $this->summary_model->count_presence( $this->session->userdata('investor_id'), "i", date('Y-m-d', strtotime($start)), date('Y-m-d', strtotime($end)) );
+              $presence_a[$i]  = $this->summary_model->count_presence( $this->session->userdata('investor_id'), "a", date('Y-m-d', strtotime($start)), date('Y-m-d', strtotime($end)) );
+
+              $persentase_hadir[$i] = $presence_h[$i] / ($presence_h[$i] + $presence_s[$i] + $presence_c[$i] + $presence_i[$i] + $presence_a[$i]) * 100;
+            }
+
+            //var_dump($persentase_hadir); die();
             //$data_anggota = array(
             //      'jumlah_4' => $total_anggota_last_four_month,
             //      'jumlah_3' => $total_anggota_last_three_month,
@@ -215,12 +230,8 @@ class Summary extends Front_Controller {
                            ->set('total_anggota_last_two_month', $total_anggota_last_two_month)
                            ->set('total_anggota_last_three_month', $total_anggota_last_three_month)
                            ->set('total_anggota_last_four_month', $total_anggota_last_four_month)
-                           ->set('persentase_kenaikan_anggota', $persentase_kenaikan_anggota)
-                           ->set('total_majelis', $total_majelis)
-                           ->set('total_majelis_last_month', $total_majelis_last_month)
-                           ->set('persentase_kenaikan_majelis', $persentase_kenaikan_majelis)
-                           ->set('total_cabang',  $total_cabang)
-                           ->set('total_officer', $total_officer)
+                           ->set('presence_h', $presence_h)
+                           ->set('persentase_hadir', $persentase_hadir)
                            //->set_partial('graph-anggota', 'partials/graph-anggota', $data_anggota)
                            ->build('summary-chart');
         }

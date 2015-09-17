@@ -50,40 +50,30 @@ class summary_model extends MY_Model {
 	}
 
 	//COUNT PRESENCE CLIENTS
-	public function count_presence($kehadiran, $branch, $date_start, $date_end, $inv_id)
+	public function count_presence($inv_id, $kehadiran, $date_start, $date_end, $branch='')
 	{
-		/*
-		$presence_h = $this->presence_model->count_presence("h", $b->branch_id, $date_start, $date_end);
-		$presence_s = $this->presence_model->count_presence("s", $b->branch_id, $date_start, $date_end);
-		$presence_c = $this->presence_model->count_presence("c", $b->branch_id, $date_start, $date_end);
-		$presence_i = $this->presence_model->count_presence("i", $b->branch_id, $date_start, $date_end);
-		$presence_a = $this->presence_model->count_presence("a", $b->branch_id, $date_start, $date_end);
-												
-		$presentase = $presence_h / ($presence_h + $presence_s + $presence_c + $presence_i + $presence_a) * 100;			
-		*/
-		
 		if($kehadiran == "h"){ $column = "tr_absen_h";}
 		elseif($kehadiran == "s"){ $column = "tr_absen_s";}
 		elseif($kehadiran == "c"){ $column = "tr_absen_c";}
 		elseif($kehadiran == "i"){ $column = "tr_absen_i";}
 		elseif($kehadiran == "a"){ $column = "tr_absen_a";}
-		
+
 		return $this->db->select("sum($column) as numrows")
 						->from('tbl_transaction')
 						->join('tbl_clients', 'tbl_clients.client_id = tbl_transaction.tr_client', 'left')
-						->join('tbl_group', 'tbl_group.group_id = tbl_transaction.tr_group', 'left')
-						->join('tbl_branch', 'tbl_branch.branch_id = tbl_group.group_branch', 'left')
+						//->join('tbl_group', 'tbl_group.group_id = tbl_transaction.tr_group', 'left')
+						//->join('tbl_branch', 'tbl_branch.branch_id = tbl_group.group_branch', 'left')
 						->where('tbl_transaction.deleted','0')
 						->where('tbl_clients.client_pembiayaan_sumber', $inv_id)
 						->where('tbl_clients.deleted', '0')
 						->where('tbl_clients.client_status', '1')
-						->where('tbl_branch.branch_id',$branch)
-						->where("tr_date >= '".$date_start."'")
-						->where("tr_date <= '".$date_end."'")
+						//->where('tbl_branch.branch_id',$branch)
+						->where("tbl_transaction.tr_date >= '".$date_start."'")
+						->where("tbl_transaction.tr_date <= '".$date_end."'")
 						->get()
 						->row()
 						->numrows;
-						
+
 	}
 
 	//COUNT GROUPS (MAJELIS)
@@ -398,6 +388,6 @@ class summary_model extends MY_Model {
 		return $this->db->query($q)->row()->os_pinjaman;
 	}
 
-	
+
 
 }

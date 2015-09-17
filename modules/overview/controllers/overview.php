@@ -98,6 +98,7 @@ class Overview extends Front_Controller {
         }
     }
 
+    //UNUSED - TEMPLATE
     public function customer(){
         if($this->session->userdata('logged_in'))
         {
@@ -117,7 +118,6 @@ class Overview extends Front_Controller {
         {
             //$last_day_last_month = date('Y-m-d', strtotime('last day of previous month'));
             $one_month_ago         = date('Y-m-d', strtotime('previous month'));
-            //$three_months_ago    = date('Y-m-d', strtotime('three months ago'));
 
             $total_anggota               = $this->overview_model->count_all_anggota_by_investor( $this->session->userdata('investor_id') );
             $total_anggota_last_month    = $this->overview_model->count_all_anggota_by_investor( $this->session->userdata('investor_id'), $one_month_ago );

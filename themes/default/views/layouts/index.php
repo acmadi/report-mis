@@ -1,4 +1,3 @@
-<?php $user_level = $this->session->userdata('user_level'); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -110,10 +109,10 @@
 <div class="sidebar-plan">
   Progress<a href="#" class="link">Fund Channeling</a>
   <div class="progress">
-  <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+  <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
   </div>
 </div>
-<span class="space">Rp 8,000,000 / Rp 10,000,000</span>
+<span class="space"><?php echo $anggota.' Individuals (Rp '.number_format($pembiayaan).')'; ?></span>
 </div>
 
 </div>
