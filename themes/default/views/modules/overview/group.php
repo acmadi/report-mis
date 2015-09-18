@@ -18,14 +18,6 @@
                         <th>Cabang</th>
                     </tr>
                 </thead>
-
-                <tfoot>
-                    <tr>
-                        <th>Majelis</th>
-                        <th>Cabang</th>
-                    </tr>
-                </tfoot>
-
                 <tbody>
                 <?php for($i=0; $i<count($all_majelis_per_investor); $i++) {?>
                     <tr>

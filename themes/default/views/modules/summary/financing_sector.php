@@ -1,5 +1,3 @@
-<?php //var_dump($total_sektor_pembiayaan) ; ?><br/>
-<?php //var_dump($total_sektor_pembiayaan_persen); ?>
 <!-- Start Chart -->
 <div class="col-md-4">
   <ul class="topstats clearfix">
@@ -54,19 +52,34 @@ new Chartist.Bar('#sector-horizontal-bar', {
               </tr>
             </thead>
             <tbody>
+            <?php $total_sektor_persen = 0; ?>
             <?php for($i=1; $i<=count($sektor); $i++) { ?>
               <tr>
                 <td><?php echo $sektor[$i-1]->sector_name; ?></td>
-                <td><?php echo $total_sektor_pembiayaan[$i]; ?></td>
-                <td><?php echo number_format($total_sektor_pembiayaan_persen[$i], 2).'%'; ?></td>
+                <td>
+                  <?php if( $i==count($sektor) ){ ?>
+                  <?php   $unknown_sector = $total_anggota - array_sum($total_sektor_pembiayaan); ?>
+                  <?php   $lainnya        = $total_sektor_pembiayaan[$i] + $unknown_sector; ?>
+                  <?php   echo number_format($lainnya); ?>
+                  <?php }else { echo number_format($total_sektor_pembiayaan[$i]); } ?>
+                </td>
+                <td>
+                  <?php if( $i==count($sektor) ){ ?>
+                  <?php   $persen_lainnya = $lainnya/(array_sum($total_sektor_pembiayaan) + $unknown_sector) * 100; ?>
+                  <?php   $total_sektor_persen = $total_sektor_persen + $persen_lainnya; ?>
+                  <?php   echo number_format($persen_lainnya).'%'; ?>
+                  <?php }else { $total_sektor_persen = $total_sektor_persen + $total_sektor_pembiayaan_persen[$i]; ?>
+                  <?php         echo number_format($total_sektor_pembiayaan_persen[$i], 2).'%'; ?>
+                  <?php } ?>
+                </td>
               </tr>
             <?php } ?>
             </tbody>
             <thead>
               <tr>
                 <td><b>TOTAL ALL SECTORS</b></td>
-                <td><?php echo number_format(array_sum($total_sektor_pembiayaan)); ?></td>
-                <td><?php echo array_sum($total_sektor_pembiayaan_persen).'%'; ?></td>
+                <td><?php echo number_format(array_sum($total_sektor_pembiayaan) + $unknown_sector); ?></td>
+                <td><?php echo array_sum($total_sektor_pembiayaan_persen, 0).'%'; ?></td>
               </tr>
             </thead>
           </table>

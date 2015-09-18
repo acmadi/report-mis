@@ -32,7 +32,7 @@
             <thead>
               <tr>
                 <td>Total Bayar Pembiayaan</td>
-                <td>Jumlah</td>
+                <td>Jumlah Dibiayai</td>
                 <td>Nilai</td>
                 <td>PAR</td>
               </tr>
@@ -40,7 +40,7 @@
             <tbody>
               <tr>
                 <td><?php echo 'Anggota: <span class="label label-warning">'.number_format($total_anggota_dijamin).'</span>'; ?></td>
-                <td><?php echo '<span class="label label-default">'   .number_format(array_sum($total_pembiayaan_aktif)).'</span>'; ?></td>
+                <td><?php echo '<span class="label label-default">'   .number_format(array_sum($total_pembiayaan_aktif)).'</span>'.' dari '.'<span class="label label-warning">'.number_format($total_anggota_dijamin).'</span>'; ?></td>
                 <td><?php echo '<span class="label label-success">Rp '.number_format(array_sum($amount_pembiayaan_aktif)).'</span.'; ?></td>
                 <td><?php echo '<span class="label label-danger">Rp ' .number_format(array_sum($par_per_pembiayaan)).' ('.number_format(array_sum($persen_par_per_pembiayaan), 2).'%)'.'</span>'; ?></td>
               </tr>

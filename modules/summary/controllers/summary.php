@@ -78,7 +78,8 @@ class Summary extends Front_Controller {
     public function financing_sector(){
         if($this->session->userdata('logged_in'))
         {
-             //portfolio sektor pembiayaan
+            $total_anggota_dijamin   = $this->overview_model->count_all_anggota_by_investor( $this->session->userdata('investor_id') );
+            //portfolio sektor pembiayaan
             $total_sektor=0;
             for($i=1;$i<=9;$i++){
               $total_sektor_pembiayaan[$i] = $this->financial_stats_model->count_sektor_pembiayaan_per_investor( $this->session->userdata('investor_id'), $i );
@@ -91,10 +92,11 @@ class Summary extends Front_Controller {
 
             $sektor = $this->financial_stats_model->list_sektor_pembiayaan();
 
-             $this->template->set('menu_title', 'Financing Sector')
+            $this->template->set('menu_title', 'Financing Sector')
                             ->set('menu_description', 'A Quick Overview of Your Portfolios.')
                             ->set('menu_dashboard', 'active')
                             ->set('sektor', $sektor)
+                            ->set('total_anggota', $total_anggota_dijamin)
                             ->set('total_sektor_pembiayaan', $total_sektor_pembiayaan)
                             ->set('total_sektor_pembiayaan_persen', $total_sektor_pembiayaan_persen)
                             ->build('financing_sector');

@@ -20,15 +20,6 @@
                         <th>Cabang</th>
                     </tr>
                 </thead>
-
-                <tfoot>
-                    <tr>
-                        <th>No Rekening</th>
-                        <th>Anggota</th>
-                        <th>Cabang</th>
-                    </tr>
-                </tfoot>
-
                 <tbody>
                 <?php for($i=0; $i<count($all_anggota_per_investor); $i++) {?>
                     <tr>

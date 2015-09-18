@@ -4,10 +4,10 @@
 <div class="col-md-2">
   <ul class="panel quick-menu clearfix style="border: none;"">
     <li class="col-sm-6">
-      <a href="<?php echo site_url('overview'); ?>"><i class="fa fa-user"></i>Members<span class="label label-danger"><?php echo $total_anggota; ?></span></a>
+      <a href="<?php echo site_url('overview/member'); ?>"><i class="fa fa-user"></i>Members<span class="label label-danger"><?php echo $total_anggota; ?></span></a>
     </li>
     <li class="col-sm-6">
-      <a href="<?php echo site_url('summary'); ?>"><i class="fa fa-group"></i>Groups<span class="label label-danger"><?php echo $total_majelis; ?></span></a>
+      <a href="<?php echo site_url('overview/group'); ?>"><i class="fa fa-group"></i>Groups<span class="label label-danger"><?php echo $total_majelis; ?></span></a>
     </li>
   </ul>
 </div>
