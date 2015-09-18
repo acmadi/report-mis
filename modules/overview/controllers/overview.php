@@ -17,6 +17,51 @@ class Overview extends Front_Controller {
       $this->load->model('overview_model');
     }
 
+    //UNUSED - TEMPLATE
+    public function customer(){
+        if($this->session->userdata('logged_in'))
+        {
+            $this->template->set('menu_title', 'Single Customer Overview')
+                           ->set('menu_description', 'A Comprehensive Overview of Single Customer under Your Portfolios.')
+                           ->set('menu_dashboard', 'active')
+                           ->build('overview');
+        }else
+        {
+            redirect('login', 'refresh');
+        }
+    }
+
+    public function pembiayaan($data_id='', $client_id=''){
+        if($this->session->userdata('logged_in'))
+        {
+            //echo $data_id.'-'.$client_id; die();
+            if($data_id!='')
+            {
+              $detail_pembiayaan     = $this->overview_model->detail_pembiayaan_anggota($data_id);
+
+              $detail_absensi_hadir  = $this->overview_model->count_presence_per_type($client_id, $detail_pembiayaan[0]->data_ke, "h", $detail_pembiayaan[0]->data_date_first, $detail_pembiayaan[0]->data_jatuhtempo);
+              $detail_absensi_sakit  = $this->overview_model->count_presence_per_type($client_id, $detail_pembiayaan[0]->data_ke, "s", $detail_pembiayaan[0]->data_date_first, $detail_pembiayaan[0]->data_jatuhtempo);
+              $detail_absensi_cuti   = $this->overview_model->count_presence_per_type($client_id, $detail_pembiayaan[0]->data_ke, "c", $detail_pembiayaan[0]->data_date_first, $detail_pembiayaan[0]->data_jatuhtempo);
+              $detail_absensi_izin   = $this->overview_model->count_presence_per_type($client_id, $detail_pembiayaan[0]->data_ke, "i", $detail_pembiayaan[0]->data_date_first, $detail_pembiayaan[0]->data_jatuhtempo);
+              $detail_absensi_alpa   = $this->overview_model->count_presence_per_type($client_id, $detail_pembiayaan[0]->data_ke, "a", $detail_pembiayaan[0]->data_date_first, $detail_pembiayaan[0]->data_jatuhtempo);
+              $detail_absensi_persen = $detail_absensi_hadir/($detail_absensi_hadir + $detail_absensi_sakit + $detail_absensi_cuti + $detail_absensi_izin + $detail_absensi_alpa) * 100;
+              $this->template->set('menu_title', 'Single Customer Overview')
+                             ->set('menu_description', 'A Comprehensive Overview of Single Customer under Your Portfolios.')
+                             ->set('menu_dashboard', 'active')
+                             ->set('detail_pembiayaan', $detail_pembiayaan)
+                             ->set('detail_absensi_persen', $detail_absensi_persen)
+                             ->build('detail-pembiayaan-anggota');
+            }
+            else
+            {
+              redirect('summary/financing_portfolio', 'refresh');
+            }
+        }else
+        {
+            redirect('login', 'refresh');
+        }
+    }
+
     public function group($id=''){
         if($this->session->userdata('logged_in'))
         {
@@ -32,7 +77,7 @@ class Overview extends Front_Controller {
             }
             else
             {
-              $this->summary();
+              //$this->summary();
               $all_majelis_per_investor = $this->overview_model->list_all_majelis_by_investor($this->session->userdata('investor_id'));
               $this->template->set('menu_title', 'Group Overview')
                              ->set('menu_description', 'A Quick Overview of Group under Your Portfolios.')
@@ -75,7 +120,7 @@ class Overview extends Front_Controller {
             }
             else
             {
-                $this->summary();
+                //$this->summary();
                 $all_anggota_per_investor = $this->overview_model->list_all_anggota_by_investor($this->session->userdata('investor_id'));
                 $this->template->set('menu_title', 'Member Overview')
                                ->set('menu_description', 'A Quick Overview of Members/Customers under Your Portfolios.')
@@ -92,20 +137,6 @@ class Overview extends Front_Controller {
                                ->set('all_anggota_per_investor', $all_anggota_per_investor)
                                ->build('member');
             }
-        }else
-        {
-            redirect('login', 'refresh');
-        }
-    }
-
-    //UNUSED - TEMPLATE
-    public function customer(){
-        if($this->session->userdata('logged_in'))
-        {
-            $this->template->set('menu_title', 'Single Customer Overview')
-                           ->set('menu_description', 'A Comprehensive Overview of Single Customer under Your Portfolios.')
-                           ->set('menu_dashboard', 'active')
-                           ->build('overview');
         }else
         {
             redirect('login', 'refresh');

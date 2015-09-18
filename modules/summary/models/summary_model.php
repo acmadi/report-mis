@@ -49,7 +49,7 @@ class summary_model extends MY_Model {
 						->numrows;
 	}
 
-	//COUNT PRESENCE CLIENTS
+	//COUNT PRESENCE INVESTOR'S CLIENTS
 	public function count_presence($inv_id, $kehadiran, $date_start, $date_end, $branch='')
 	{
 		if($kehadiran == "h"){ $column = "tr_absen_h";}

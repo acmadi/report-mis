@@ -61,7 +61,7 @@ class overview_model extends MY_Model {
 	public function list_pembiayaan_anggota($id)
 	{
     	return $this->db
-    							->select("data_id, data_plafond, data_jangkawaktu, data_totalangsuran, data_angsuranpokok, data_margin, data_angsuranke, data_jatuhtempo")
+    							->select("client_id, data_id, data_plafond, data_jangkawaktu, data_totalangsuran, data_angsuranpokok, data_margin, data_angsuranke, data_jatuhtempo")
 									->from('tbl_pembiayaan')
 									->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left ')
 									->where('tbl_clients.client_id', $id)
@@ -73,10 +73,10 @@ class overview_model extends MY_Model {
 	public function detail_pembiayaan_anggota($data_id)
 	{
     	return $this->db
-    							->select("data_id, data_plafond, data_jangkawaktu, data_totalangsuran, data_angsuranpokok, data_margin, data_angsuranke, data_jatuhtempo")
+    							->select("client_pembiayaan, data_ke, data_status, data_date_first, data_jatuhtempo, data_plafond, data_totalangsuran, data_tabunganwajib, data_jangkawaktu ")
 									->from('tbl_pembiayaan')
 									->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left ')
-									->where('tbl_clients.client_id', $data_id)
+									->where('tbl_pembiayaan.data_id', $data_id)
 									->where('tbl_clients.deleted', '0')
 									->get()
 									->result();
@@ -136,6 +136,35 @@ class overview_model extends MY_Model {
 						->get()
 						->row()
 						->numrows;
+	}
+
+	//COUNT PRESENCE INVESTOR'S CLIENTS
+	public function count_presence_per_type($id, $ke, $kehadiran, $date_start, $date_end, $branch='')
+	{
+		if($kehadiran == "h"){ $column = "tr_absen_h";}
+		elseif($kehadiran == "s"){ $column = "tr_absen_s";}
+		elseif($kehadiran == "c"){ $column = "tr_absen_c";}
+		elseif($kehadiran == "i"){ $column = "tr_absen_i";}
+		elseif($kehadiran == "a"){ $column = "tr_absen_a";}
+
+		return $this->db->select("sum($column) as numrows")
+						->from('tbl_transaction')
+						->join('tbl_clients', 'tbl_clients.client_id = tbl_transaction.tr_client', 'left')
+						->join('tbl_pembiayaan', 'tbl_pembiayaan.data_client = tbl_transaction.tr_client', 'left')
+						//->join('tbl_group', 'tbl_group.group_id = tbl_transaction.tr_group', 'left')
+						//->join('tbl_branch', 'tbl_branch.branch_id = tbl_group.group_branch', 'left')
+						->where('tbl_transaction.deleted','0')
+						->where('tbl_clients.client_id', $id)
+						->where('tbl_clients.deleted', '0')
+						->where('tbl_clients.client_status', '1')
+						->where('tbl_pembiayaan.data_ke', $ke)
+						//->where('tbl_branch.branch_id',$branch)
+						->where("tbl_transaction.tr_date >= '".$date_start."'")
+						->where("tbl_transaction.tr_date <= '".$date_end."'")
+						->get()
+						->row()
+						->numrows;
+
 	}
 
 	//LIST & COUNT GROUPS (MAJELIS)

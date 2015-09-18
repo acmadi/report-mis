@@ -1,7 +1,7 @@
 <!-- Start Panel -->
 <div class="col-md-12">
     <ul class="topstats clearfix">
-      <div class="panel panel-default">
+      <div class="panel panel-default" style="border: none;">
         <div class="panel-title">
           Group Portfolios
         </div>

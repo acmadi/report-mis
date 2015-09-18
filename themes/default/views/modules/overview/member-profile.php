@@ -8,7 +8,7 @@
             <h1><?php echo $detail_anggota_per_investor[0]->client_fullname ?></h1>
             <p><i class="fa fa-map-marker"></i> <?php echo strtoupper($detail_anggota_per_investor[0]->branch_name); ?></p>
             <ul class="stats widget-inline-list clearfix">
-              <li class="col-md-4"><span><?php echo number_format($detail_anggota_per_investor[0]->data_plafond); ?></span>Plafond</li>
+              <li class="col-md-4"><span><?php echo 'Rp '.number_format($detail_anggota_per_investor[0]->data_plafond); ?></span>Plafond</li>
               <li class="col-md-4"><span><?php echo $detail_anggota_per_investor[0]->client_account; ?></span>No Rekening</li>
               <li class="col-md-4"><span><?php echo count($daftar_pembiayaan_anggota); ?>x</span>Dibiayai</li>
             </ul>
@@ -66,7 +66,7 @@
             <div class="panel-body">
               <ul class="basic-list image-list">
                 <?php for ($i=0; $i<count($daftar_pembiayaan_anggota); $i++) { ?>
-                      <li>Rp <b><?php echo '<a href="'.site_url('overview/pembiayaan').'/'.$daftar_pembiayaan_anggota[$i]->data_id.'">'.number_format($daftar_pembiayaan_anggota[$i]->data_plafond).'</a>'; ?></b>
+                      <li>Rp <b><?php echo '<a href="'.site_url('overview/pembiayaan').'/'.$daftar_pembiayaan_anggota[$i]->data_id.'/'.$daftar_pembiayaan_anggota[$i]->client_id.'">'.number_format($daftar_pembiayaan_anggota[$i]->data_plafond).'</a>'; ?></b>
                       <span class="desc"><?php echo date('d M Y', strtotime($daftar_pembiayaan_anggota[$i]->data_jatuhtempo)); ?></span></li>
                 <?php } ?>
               </ul>
