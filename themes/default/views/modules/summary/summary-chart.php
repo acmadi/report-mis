@@ -14,7 +14,7 @@
     <div class="col-xs-12 col-lg-6">
       <div class="panel panel-default" style="border: 0px;">
         <div class="panel-title">
-          Grafik Kehadiran Anggota
+          Grafik Kehadiran Anggota (%)
         </div>
             <div class="panel-body">
               <div id="kehadiran-anggota" class="ct-chart ct-perfect-fourth"></div>
