@@ -2,7 +2,7 @@
 <h4>Quick Menu</h4>
 </div>
 <div class="col-md-2">
-  <ul class="panel quick-menu clearfix">
+  <ul class="panel quick-menu clearfix style="border: none;"">
     <li class="col-sm-6">
       <a href="<?php echo site_url('overview'); ?>"><i class="fa fa-user"></i>Members<span class="label label-danger"><?php echo $total_anggota; ?></span></a>
     </li>

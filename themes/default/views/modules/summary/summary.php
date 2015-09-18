@@ -2,7 +2,7 @@
 <h4>Quick Menu</h4>
 </div>
 <div class="col-md-6">
-  <ul class="panel quick-menu clearfix">
+  <ul class="panel quick-menu clearfix" style="border: none;">
     <li class="col-sm-2">
       <a href="<?php echo site_url('summary/graphics'); ?>"><i class="fa fa-bar-chart"></i>Graphical Summary</a>
     </li>
