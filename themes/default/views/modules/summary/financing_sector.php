@@ -79,7 +79,7 @@ new Chartist.Bar('#sector-horizontal-bar', {
               <tr>
                 <td><b>TOTAL ALL SECTORS</b></td>
                 <td><?php echo number_format(array_sum($total_sektor_pembiayaan) + $unknown_sector); ?></td>
-                <td><?php echo array_sum($total_sektor_pembiayaan_persen, 0).'%'; ?></td>
+                <td><?php echo array_sum($total_sektor_persen, 0).'%'; ?></td>
               </tr>
             </thead>
           </table>
