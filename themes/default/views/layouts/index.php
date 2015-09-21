@@ -41,7 +41,7 @@
 
     <!-- Start App Logo -->
     <div class="applogo">
-      <a href="/" class="logo">Amartha IRS</a>
+      <a href="<?php echo site_url(); ?>" class="logo">Amartha IRS</a>
     </div>
     <!-- End App Logo -->
 
