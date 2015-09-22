@@ -16,11 +16,21 @@ class overview_model extends MY_Model {
 	And after it has run:
 		$this->db->last_query();
 	*/
+	public function detail_investor($id)
+	{
+		return $this->db
+								->select("lender_name, lender_address, lender_phone, lender_email, lender_account_no, lender_total_investment, person_in_charge, person_address, person_phone, person_email, lender_username")
+								->from('tbl_lenders')
+								->where('tbl_lenders.lender_id', $id)
+				 		 		->where('tbl_lenders.deleted', '0')
+				 		 		->get()->result();
+	}
+
 	//LIST & COUNT ANGGOTA
 	public function list_all_anggota_by_investor($inv_id)
 	{
 		$this->db->distinct();
-    	$this->db->select("client_id, client_fullname, client_account, branch_name")
+    $this->db->select("client_id, client_fullname, client_account, branch_name")
 				 ->from('tbl_clients')
 				 ->join('tbl_branch', 'tbl_branch.branch_id = tbl_clients.client_branch', 'left ')
 				 ->where('tbl_clients.client_pembiayaan_sumber', $inv_id)

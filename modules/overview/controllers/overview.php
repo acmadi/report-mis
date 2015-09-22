@@ -143,6 +143,29 @@ class Overview extends Front_Controller {
         }
     }
 
+    public function user($id=''){
+        if($this->session->userdata('logged_in'))
+        {
+            if($id!='')
+            {
+                $detail_investor = $this->overview_model->detail_investor($id);
+                //var_dump($detail_investor); die();
+                $this->template->set('menu_title', 'Profile')
+                               ->set('menu_description', 'Your Profile Details.')
+                               ->set('menu_dashboard', 'active')
+                               ->set('detail_investor', $detail_investor)
+                               ->build('user');
+            }
+            else
+            {
+                redirect('overview', 'refresh');
+            }
+        }else
+        {
+            redirect('login', 'refresh');
+        }
+    }
+
     public function index()
     {
         if($this->session->userdata('logged_in'))
