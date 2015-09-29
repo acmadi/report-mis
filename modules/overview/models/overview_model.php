@@ -83,7 +83,7 @@ class overview_model extends MY_Model {
 	public function detail_pembiayaan_anggota($data_id)
 	{
     	return $this->db
-    							->select("client_pembiayaan, data_ke, data_status, data_date_first, data_jatuhtempo, data_plafond, data_totalangsuran, data_tabunganwajib, data_jangkawaktu ")
+    							->select("client_pembiayaan, data_ke, data_status, data_date_first, data_jatuhtempo, data_plafond, data_totalangsuran, data_tabunganwajib, data_jangkawaktu, data_par, data_popi_total, data_popi_kategori, data_rmc_total, data_rmc_kategori")
 									->from('tbl_pembiayaan')
 									->join('tbl_clients', 'tbl_clients.client_id = tbl_pembiayaan.data_client', 'left ')
 									->where('tbl_pembiayaan.data_id', $data_id)

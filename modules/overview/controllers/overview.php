@@ -166,8 +166,7 @@ class Overview extends Front_Controller {
         }
     }
 
-    public function index()
-    {
+    public function index(){
         if($this->session->userdata('logged_in'))
         {
             //$last_day_last_month = date('Y-m-d', strtotime('last day of previous month'));
@@ -205,8 +204,7 @@ class Overview extends Front_Controller {
         }
     }
 
-    private function summary()
-    {
+    private function summary(){
       $one_month_ago = date('Y-m-d', strtotime('previous month'));
 
       $this->total_anggota               = $this->overview_model->count_all_anggota_by_investor( $this->session->userdata('investor_id') );

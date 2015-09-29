@@ -48,19 +48,15 @@
               </tr>
               <tr>
                 <td>PAR</td>
-                <td><?php echo '0%'; ?></td>
+                <td><?php echo $detail_pembiayaan[0]->data_par; ?></td>
               </tr>
               <tr>
                 <td>PPI</td>
-                <td><?php echo '44(C)'; ?></td>
+                <td><?php echo $detail_pembiayaan[0]->data_popi_total .'(' .$detail_pembiayaan[0]->data_popi_kategori .')'; ?></td>
               </tr>
               <tr>
                 <td>CHI</td>
-                <td><?php echo '8(D)'; ?></td>
-              </tr>
-              <tr>
-                <td>CHI</td>
-                <td><?php echo '8(D)'; ?></td>
+                <td><?php echo $detail_pembiayaan[0]->data_rmc_total .'(' .$detail_pembiayaan[0]->data_rmc_kategori .')'; ?></td>
               </tr>
               <tr>
                 <td>Status</td>
