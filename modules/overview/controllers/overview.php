@@ -12,9 +12,19 @@ class Overview extends Front_Controller {
     private $total_cabang;
     private $total_officer;
 
+    private $total_par;
+    private $total_anggota_dijamin;
+    private $total_pembiayaan_aktif;
+    private $amount_pembiayaan_aktif;
+    private $total_par_lancar;
+    private $total_par_macet;
+    private $total_amount_par;
+    private $par_sisaangsuran;
+
     public function __construct(){
       parent::__construct();
       $this->load->model('overview_model');
+      $this->load->model('summary/financial_stats_model');
     }
 
     //UNUSED - TEMPLATE
@@ -215,6 +225,64 @@ class Overview extends Front_Controller {
       $this->persentase_kenaikan_majelis = round( (($total_majelis->client_group - $total_majelis_last_month->client_group)/$total_majelis_last_month->client_group ) * 100);
       $this->total_cabang  = $this->overview_model->count_all_cabang_by_investor(  $this->session->userdata('investor_id') );
       $this->total_officer = $this->overview_model->count_all_officer_by_investor( $this->session->userdata('investor_id') );
+    }
+
+    private function total_par(){
+            $total_anggota_dijamin   = $this->overview_model->count_all_anggota_by_investor( $this->session->userdata('investor_id') );
+
+      //PORTO PEMBIAYAAN
+            for($i=0; $i<5; $i++){
+              $total_pembiayaan_aktif[$i]  = $this->financial_stats_model->count_pembiayaan_aktif_ke_per_investor( $this->session->userdata('investor_id'), $i+1 );
+              $amount_pembiayaan_aktif[$i] = $this->financial_stats_model->sum_pembiayaan_aktif_ke_per_investor( $this->session->userdata('investor_id'), $i+1 );
+            }
+
+      //PAR
+            $total_par_lancar = array_sum($total_pembiayaan_aktif);
+            $total_par_macet  = 0;
+            for($i=1;$i<=12;$i++){
+              $total_par[$i]        = $this->financial_stats_model->count_par_per_investor( $this->session->userdata('investor_id'), $i);
+              $total_amount_par[$i] = $this->financial_stats_model->sum_par_per_investor( $this->session->userdata('investor_id'), $i );
+              //Because $total_par[0] supposed to be valid containing total_par_lancar BUT it turns out INVALID,
+              //we will just take (1 total par lancar) total pembiayaan - total par from 1-12, then later 13+
+              //                  (2 total par macet) sum total par from 1-12, then later 13+
+              $total_par_lancar   = $total_par_lancar - $total_par[$i]; //1st
+              $total_par_macet    = $total_par_macet  + $total_par[$i];
+            }
+            $total_par[13]          = $this->financial_stats_model->count_par_13_per_investor( $this->session->userdata('investor_id'), 13);
+            $total_amount_par[13]   = $this->financial_stats_model->sum_par_13_per_investor( $this->session->userdata('investor_id'), 13 );
+            
+      //Update again PAR Lancar & Macet
+            $total_par_lancar   = $total_par_lancar - $total_par[13];//2nd
+            $total_par_macet    = $total_par_macet  + $total_par[13];
+
+      //NOMINAL PAR
+            $par_nominal = $this->financial_stats_model->get_pembiayaan_par_per_investor( $this->session->userdata('investor_id') );
+            foreach($par_nominal as $p){
+              for($i=1;$i<=12;$i++){
+                if($p->data_par == $i){
+                  $sisa_angsuran         = (50 - $p->data_angsuranke) * ($p->data_plafond / 50);
+                  $par_sisaangsuran[$i] += $sisa_angsuran;
+                }
+              }
+            }
+
+            $par_nominal_13 = $this->financial_stats_model->get_pembiayaan_par_13_per_investor( $this->session->userdata('investor_id') );
+            foreach($par_nominal_13 as $p){
+              if($p->data_par >= 13){
+                $sisa_angsuran = (50 - $p->data_angsuranke) * ($p->data_plafond / 50);
+                $par_sisaangsuran[13] += $sisa_angsuran;
+              }
+            }
+
+            $this->total_anggota_dijamin   = $total_anggota_dijamin;
+            $this->total_pembiayaan_aktif  = array_sum($total_pembiayaan_aktif);
+            $this->amount_pembiayaan_aktif = array_sum($amount_pembiayaan_aktif);
+            $this->total_par               = array_sum($total_par);
+            $this->total_par_lancar        = $total_par_lancar;
+            $this->total_par_macet         = $total_par_macet;
+            $this->total_amount_par        = array_sum($total_amount_par);
+            $this->par_sisaangsuran        = array_sum($par_sisaangsuran);
+
     }
 }
 

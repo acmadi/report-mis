@@ -78,14 +78,13 @@
 <div class="sidebar clearfix">
 
 <ul class="sidebar-panel nav">
-  <li><a href="<?php echo site_url(); ?>"><span class="icon color5"><i class="fa fa-home"></i></span>Dashboard</a></li>
+  <li><a href="<?php echo site_url('overview'); ?>"><span class="icon color5"><i class="fa fa-home"></i></span>Dashboard</a></li>
 </ul>
 
 <ul class="sidebar-panel nav">
-  <li class="sidetitle">Overview</li>
-  <li><a href="#"><span class="icon color10"><i class="fa fa-file-text-o"></i></span>Report<span class="caret"></span></a>
+  <li class="sidetitle">Borrowers Statistics</li>
+  <li><a href="#"><span class="icon color10"><i class="fa fa-male"></i></span>Borrowers<span class="caret"></span></a>
     <ul>
-      <li><a href="<?php echo site_url('overview'); ?>">Overall Report</a></li>
       <li><a href="<?php echo site_url('overview/group'); ?>">Groups</a></li>
       <li><a href="<?php echo site_url('overview/member'); ?>">Members</a></li>
     </ul>
@@ -93,15 +92,21 @@
 </ul>
 
 <ul class="sidebar-panel nav">
-  <li class="sidetitle">Performance Summary</li>
+  <li class="sidetitle">Operational Performance</li>
   <li><a href="#"><span class="icon color8"><i class="fa fa-bar-chart"></i></span>Summary<span class="caret"></span></a>
     <ul>
-      <li><a href="<?php echo site_url('summary'); ?>">General Summary</a></li>
-      <li><a href="<?php echo site_url('summary/graphics'); ?>">Graphical Summary</a></li>
-      <li><a href="<?php echo site_url('summary/customer_portfolio'); ?>">Customers Portfolios</a></li>
-      <li><a href="<?php echo site_url('summary/financing_portfolio'); ?>">Financing Portfolios</a></li>
-      <li><a href="<?php echo site_url('summary/financing_sector'); ?>">Financing Sectors</a></li>
-      <li><a href="<?php echo site_url('summary/portfolio_at_risk'); ?>">Portfolio at Risk (PAR)</a></li>
+      <li><a href="<?php echo site_url('report/operation/'); ?>">Monthly Progress Report</a></li>
+    </ul>
+  </li>
+</ul>
+
+<ul class="sidebar-panel nav">
+  <li class="sidetitle">Reporting Tools</li>
+  <li><a href="#"><span class="icon color8"><i class="fa fa-file-text-o"></i></span>Financial Report<span class="caret"></span></a>
+    <ul>      
+      <li><a href="<?php echo site_url('accounting/jurnal'); ?>">Cashflow Statement</a></li>
+      <li><a href="<?php echo site_url('accounting/laba_rugi'); ?>">Income Statement</a></li>
+      <li><a href="<?php echo site_url('accounting/neraca'); ?>">Balance Sheet</a></li>
     </ul>
   </li>
 </ul>
@@ -124,7 +129,7 @@
 <div class="content">
 
   <!-- Start Page Header -->
-  <div class="page-header">
+  <div class="page-header" style="background-color: transparent;">
     <h1 class="title"><?php echo $menu_title; ?></h1>
     <ol class="breadcrumb">
       <li class="active"><?php echo $menu_description; ?></li>

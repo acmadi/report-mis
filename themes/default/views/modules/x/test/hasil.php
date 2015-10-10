@@ -1,1 +1,0 @@
-<?php echo "<small class='pull-left'><br/>".$this->benchmark->elapsed_time()." | ".$this->benchmark->memory_usage()."</small>";?>
