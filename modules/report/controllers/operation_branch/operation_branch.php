@@ -11,10 +11,6 @@ class Operation_branch extends Front_Controller{
 
 		if($this->session->userdata('logged_in'))
 		{
-		  //Cek User Login Branch
-		  $user_level = $this->session->userdata('user_level');
-		  //Accessible only from Admin?
-		  if($user_level=='1'){
 				if($this->input->post('filter') == '1'){
 					$branch = $this->input->post('branch');
 					if($this->input->post('startdate') == '')
@@ -157,9 +153,6 @@ class Operation_branch extends Front_Controller{
 					 ->set('date_akhir', date("d F Y", strtotime($enddate)))
 					 ->build('operation/operation_branch');
 					 //->build('review/review');
-			}else{
-				redirect('/', 'refresh');
-			}
 
 		}else{
 			redirect('login', 'refresh');
